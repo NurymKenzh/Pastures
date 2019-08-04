@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pastures</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="background-color: #f7f8d6;">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #77ab3f; border-width: 0px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Pastures", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (ViewBag.Index ?? false)
+                    {
+                        <li>@Html.ActionLink("Главная", "Index", "Home", null, new { style = "padding-left: 0px; font-weight:bold" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Главная", "Index", "Home", null, new { style = "padding-left: 0px;" })</li>
+                    }
+                    @if (ViewBag.About ?? false)
+                    {
+                        <li>@Html.ActionLink("О сайте", "About", "Home", null, new { style = "font-weight:bold" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("О сайте", "About", "Home")</li>
+                    }
+                    @if (ViewBag.Contact ?? false)
+                    {
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home", null, new { style = "font-weight:bold" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    }
+                    @if (ViewBag.Instruction ?? false)
+                    {
+                        <li>@Html.ActionLink("Инструкция", "Instruction", "Home", null, new { style = "font-weight:bold" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Инструкция", "Instruction", "Home")</li>
+                    }
+                        
+                    @Html.Partial("_AdminPartial")
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Pastures</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

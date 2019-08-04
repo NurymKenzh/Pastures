@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Pastures.Models.pasture_shp>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.objectid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.relief_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zone_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subtype_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soob_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catoid)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.objectid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relief_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zone_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subtype_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soob_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.catoid)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.gid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.gid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.gid })
+        </td>
+    </tr>
+}
+
+</table>

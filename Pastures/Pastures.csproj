@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2D7349C2-D921-45E8-89C5-EDB97EEB02E9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pastures</RootNamespace>
+    <AssemblyName>Pastures</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.EntityFramework.2.2.7\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BClassesController.cs" />
+    <Compile Include="Controllers\BGroupsController.cs" />
+    <Compile Include="Controllers\BTypesController.cs" />
+    <Compile Include="Controllers\BurOtdelsController.cs" />
+    <Compile Include="Controllers\BurSubOtdelsController.cs" />
+    <Compile Include="Controllers\CamelsController.cs" />
+    <Compile Include="Controllers\CATOesController.cs" />
+    <Compile Include="Controllers\CATOSpeciesController.cs" />
+    <Compile Include="Controllers\CattleController.cs" />
+    <Compile Include="Controllers\ChemicalCompsController.cs" />
+    <Compile Include="Controllers\DominantTypesController.cs" />
+    <Compile Include="Controllers\HayingsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorsesController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapsController.cs" />
+    <Compile Include="Controllers\OtdelsController.cs" />
+    <Compile Include="Controllers\PSubTypesController.cs" />
+    <Compile Include="Controllers\PTypesController.cs" />
+    <Compile Include="Controllers\RecomCattlesController.cs" />
+    <Compile Include="Controllers\RecommendsController.cs" />
+    <Compile Include="Controllers\ReliefsController.cs" />
+    <Compile Include="Controllers\SmallCattlesController.cs" />
+    <Compile Include="Controllers\SoobsController.cs" />
+    <Compile Include="Controllers\STypesController.cs" />
+    <Compile Include="Controllers\SupplyRecommendsController.cs" />
+    <Compile Include="Controllers\WClassesController.cs" />
+    <Compile Include="Controllers\WSubTypesController.cs" />
+    <Compile Include="Controllers\WTypesController.cs" />
+    <Compile Include="Controllers\ZonesController.cs" />
+    <Compile Include="Controllers\ZSubTypesController.cs" />
+    <Compile Include="Controllers\ZTypesController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607040836205_CATO.cs" />
+    <Compile Include="Migrations\201607040836205_CATO.Designer.cs">
+      <DependentUpon>201607040836205_CATO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607040946233_pasture_shp.cs" />
+    <Compile Include="Migrations\201607040946233_pasture_shp.Designer.cs">
+      <DependentUpon>201607040946233_pasture_shp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607130753449_pasture_shp1.cs" />
+    <Compile Include="Migrations\201607130753449_pasture_shp1.Designer.cs">
+      <DependentUpon>201607130753449_pasture_shp1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200542369_PType.cs" />
+    <Compile Include="Migrations\201607200542369_PType.Designer.cs">
+      <DependentUpon>201607200542369_PType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200729038_Relief.cs" />
+    <Compile Include="Migrations\201607200729038_Relief.Designer.cs">
+      <DependentUpon>201607200729038_Relief.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200744187_Zone.cs" />
+    <Compile Include="Migrations\201607200744187_Zone.Designer.cs">
+      <DependentUpon>201607200744187_Zone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200811303_PSubType.cs" />
+    <Compile Include="Migrations\201607200811303_PSubType.Designer.cs">
+      <DependentUpon>201607200811303_PSubType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200829202_Soob.cs" />
+    <Compile Include="Migrations\201607200829202_Soob.Designer.cs">
+      <DependentUpon>201607200829202_Soob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607200927385_Recommend.cs" />
+    <Compile Include="Migrations\201607200927385_Recommend.Designer.cs">
+      <DependentUpon>201607200927385_Recommend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607210306438_RecomCattle.cs" />
+    <Compile Include="Migrations\201607210306438_RecomCattle.Designer.cs">
+      <DependentUpon>201607210306438_RecomCattle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607220439341_pasture_shp2.cs" />
+    <Compile Include="Migrations\201607220439341_pasture_shp2.Designer.cs">
+      <DependentUpon>201607220439341_pasture_shp2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607250856419_pasture_tab.cs" />
+    <Compile Include="Migrations\201607250856419_pasture_tab.Designer.cs">
+      <DependentUpon>201607250856419_pasture_tab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608030545289_pasture_shp3.cs" />
+    <Compile Include="Migrations\201608030545289_pasture_shp3.Designer.cs">
+      <DependentUpon>201608030545289_pasture_shp3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608080435246_pasturepol.cs" />
+    <Compile Include="Migrations\201608080435246_pasturepol.Designer.cs">
+      <DependentUpon>201608080435246_pasturepol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608080531045_PType1.cs" />
+    <Compile Include="Migrations\201608080531045_PType1.Designer.cs">
+      <DependentUpon>201608080531045_PType1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608080549210_Haying.cs" />
+    <Compile Include="Migrations\201608080549210_Haying.Designer.cs">
+      <DependentUpon>201608080549210_Haying.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608080556597_Otdel.cs" />
+    <Compile Include="Migrations\201608080556597_Otdel.Designer.cs">
+      <DependentUpon>201608080556597_Otdel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120855214_ZType.cs" />
+    <Compile Include="Migrations\201608120855214_ZType.Designer.cs">
+      <DependentUpon>201608120855214_ZType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120918545_DominantType.cs" />
+    <Compile Include="Migrations\201608120918545_DominantType.Designer.cs">
+      <DependentUpon>201608120918545_DominantType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120957289_ZSubType.cs" />
+    <Compile Include="Migrations\201608120957289_ZSubType.Designer.cs">
+      <DependentUpon>201608120957289_ZSubType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121031526_zemfondpol.cs" />
+    <Compile Include="Migrations\201608121031526_zemfondpol.Designer.cs">
+      <DependentUpon>201608121031526_zemfondpol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608140544266_ZType1.cs" />
+    <Compile Include="Migrations\201608140544266_ZType1.Designer.cs">
+      <DependentUpon>201608140544266_ZType1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608140928430_Camel.cs" />
+    <Compile Include="Migrations\201608140928430_Camel.Designer.cs">
+      <DependentUpon>201608140928430_Camel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608151156460_Cattle.cs" />
+    <Compile Include="Migrations\201608151156460_Cattle.Designer.cs">
+      <DependentUpon>201608151156460_Cattle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160310358_Horse.cs" />
+    <Compile Include="Migrations\201608160310358_Horse.Designer.cs">
+      <DependentUpon>201608160310358_Horse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160512340_species.cs" />
+    <Compile Include="Migrations\201608160512340_species.Designer.cs">
+      <DependentUpon>201608160512340_species.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160514160_species1.cs" />
+    <Compile Include="Migrations\201608160514160_species1.Designer.cs">
+      <DependentUpon>201608160514160_species1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160529345_species2.cs" />
+    <Compile Include="Migrations\201608160529345_species2.Designer.cs">
+      <DependentUpon>201608160529345_species2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160603350_species3.cs" />
+    <Compile Include="Migrations\201608160603350_species3.Designer.cs">
+      <DependentUpon>201608160603350_species3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160746401_CATOSpecies.cs" />
+    <Compile Include="Migrations\201608160746401_CATOSpecies.Designer.cs">
+      <DependentUpon>201608160746401_CATOSpecies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608220615258_WType.cs" />
+    <Compile Include="Migrations\201608220615258_WType.Designer.cs">
+      <DependentUpon>201608220615258_WType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608220746288_ChemicalComp.cs" />
+    <Compile Include="Migrations\201608220746288_ChemicalComp.Designer.cs">
+      <DependentUpon>201608220746288_ChemicalComp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608220756029_WSubType.cs" />
+    <Compile Include="Migrations\201608220756029_WSubType.Designer.cs">
+      <DependentUpon>201608220756029_WSubType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608220847338_wellspnt.cs" />
+    <Compile Include="Migrations\201608220847338_wellspnt.Designer.cs">
+      <DependentUpon>201608220847338_wellspnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240609256_BurOtdel.cs" />
+    <Compile Include="Migrations\201608240609256_BurOtdel.Designer.cs">
+      <DependentUpon>201608240609256_BurOtdel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240706398_BType.cs" />
+    <Compile Include="Migrations\201608240706398_BType.Designer.cs">
+      <DependentUpon>201608240706398_BType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240725030_BurSubOtdel.cs" />
+    <Compile Include="Migrations\201608240725030_BurSubOtdel.Designer.cs">
+      <DependentUpon>201608240725030_BurSubOtdel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240736545_BClass.cs" />
+    <Compile Include="Migrations\201608240736545_BClass.Designer.cs">
+      <DependentUpon>201608240736545_BClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240754336_BGroup.cs" />
+    <Compile Include="Migrations\201608240754336_BGroup.Designer.cs">
+      <DependentUpon>201608240754336_BGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608260517311_burden_pasture.cs" />
+    <Compile Include="Migrations\201608260517311_burden_pasture.Designer.cs">
+      <DependentUpon>201608260517311_burden_pasture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608310944563_SpeciesNew.cs" />
+    <Compile Include="Migrations\201608310944563_SpeciesNew.Designer.cs">
+      <DependentUpon>201608310944563_SpeciesNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608310950499_SpeciesNew1.cs" />
+    <Compile Include="Migrations\201608310950499_SpeciesNew1.Designer.cs">
+      <DependentUpon>201608310950499_SpeciesNew1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010239447_PasturesNew.cs" />
+    <Compile Include="Migrations\201609010239447_PasturesNew.Designer.cs">
+      <DependentUpon>201609010239447_PasturesNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010316260_PasturesNew1.cs" />
+    <Compile Include="Migrations\201609010316260_PasturesNew1.Designer.cs">
+      <DependentUpon>201609010316260_PasturesNew1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010415231_SpeciesOld.cs" />
+    <Compile Include="Migrations\201609010415231_SpeciesOld.Designer.cs">
+      <DependentUpon>201609010415231_SpeciesOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010429396_SpeciesOld1.cs" />
+    <Compile Include="Migrations\201609010429396_SpeciesOld1.Designer.cs">
+      <DependentUpon>201609010429396_SpeciesOld1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010535346_SpeciesNew2.cs" />
+    <Compile Include="Migrations\201609010535346_SpeciesNew2.Designer.cs">
+      <DependentUpon>201609010535346_SpeciesNew2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609191322432_WClass.cs" />
+    <Compile Include="Migrations\201609191322432_WClass.Designer.cs">
+      <DependentUpon>201609191322432_WClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609191349023_wellspol.cs" />
+    <Compile Include="Migrations\201609191349023_wellspol.Designer.cs">
+      <DependentUpon>201609191349023_wellspol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609260820452_pasturestat.cs" />
+    <Compile Include="Migrations\201609260820452_pasturestat.Designer.cs">
+      <DependentUpon>201609260820452_pasturestat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609260842155_pasturestat1.cs" />
+    <Compile Include="Migrations\201609260842155_pasturestat1.Designer.cs">
+      <DependentUpon>201609260842155_pasturestat1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803081000172_Soob1.cs" />
+    <Compile Include="Migrations\201803081000172_Soob1.Designer.cs">
+      <DependentUpon>201803081000172_Soob1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091632441_SupplyRecommend.cs" />
+    <Compile Include="Migrations\201803091632441_SupplyRecommend.Designer.cs">
+      <DependentUpon>201803091632441_SupplyRecommend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803200609378_SType.cs" />
+    <Compile Include="Migrations\201803200609378_SType.Designer.cs">
+      <DependentUpon>201803200609378_SType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BClass.cs" />
+    <Compile Include="Models\BGroup.cs" />
+    <Compile Include="Models\BType.cs" />
+    <Compile Include="Models\burden_pasture.cs" />
+    <Compile Include="Models\BurOtdel.cs" />
+    <Compile Include="Models\BurSubOtdel.cs" />
+    <Compile Include="Models\Camel.cs" />
+    <Compile Include="Models\CATO.cs" />
+    <Compile Include="Models\CATOSpecies.cs" />
+    <Compile Include="Models\Cattle.cs" />
+    <Compile Include="Models\ChemicalComp.cs" />
+    <Compile Include="Models\DominantType.cs" />
+    <Compile Include="Models\Haying.cs" />
+    <Compile Include="Models\Horse.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NpgsqlContext.cs" />
+    <Compile Include="Models\Otdel.cs" />
+    <Compile Include="Models\pasturepol.cs" />
+    <Compile Include="Models\pasturestat.cs" />
+    <Compile Include="Models\PSubType.cs" />
+    <Compile Include="Models\PType.cs" />
+    <Compile Include="Models\RecomCattle.cs" />
+    <Compile Include="Models\Recommend.cs" />
+    <Compile Include="Models\Relief.cs" />
+    <Compile Include="Models\SmallCattle.cs" />
+    <Compile Include="Models\Soob.cs" />
+    <Compile Include="Models\species1.cs" />
+    <Compile Include="Models\species2.cs" />
+    <Compile Include="Models\species3.cs" />
+    <Compile Include="Models\SType.cs" />
+    <Compile Include="Models\SupplyRecommend.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\WClass.cs" />
+    <Compile Include="Models\wellspnt.cs" />
+    <Compile Include="Models\wellspol.cs" />
+    <Compile Include="Models\WSubType.cs" />
+    <Compile Include="Models\WType.cs" />
+    <Compile Include="Models\zemfondpol.cs" />
+    <Compile Include="Models\Zone.cs" />
+    <Compile Include="Models\ZSubType.cs" />
+    <Compile Include="Models\ZType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\ol.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\About\image001.jpg" />
+    <Content Include="Images\About\image003.jpg" />
+    <Content Include="Images\About\image005.jpg" />
+    <Content Include="Images\About\image007.jpg" />
+    <Content Include="Images\About\image009.jpg" />
+    <Content Include="Images\About\image013.jpg" />
+    <Content Include="Images\About\image015.jpg" />
+    <Content Include="Images\About\image017.jpg" />
+    <Content Include="Images\About\image019.jpg" />
+    <Content Include="Images\About\image022.gif" />
+    <Content Include="Images\About\image023.jpg" />
+    <Content Include="Images\About\image024.jpg" />
+    <Content Include="Images\About\image025.jpg" />
+    <Content Include="Images\About\image027.jpg" />
+    <Content Include="Images\About\image028.jpg" />
+    <Content Include="Images\About\image029.jpg" />
+    <Content Include="Images\About\image031.jpg" />
+    <Content Include="Images\About\image032.jpg" />
+    <Content Include="Images\About\image033.jpg" />
+    <Content Include="Images\About\image035.jpg" />
+    <Content Include="Images\About\image038.jpg" />
+    <Content Include="Images\About\image040.jpg" />
+    <Content Include="Images\About\image041.png" />
+    <Content Include="Images\About\image043.png" />
+    <Content Include="Images\About\image045.png" />
+    <Content Include="Images\About\image047.png" />
+    <Content Include="Images\About\image049.png" />
+    <Content Include="Images\About\image051.png" />
+    <Content Include="Images\About\image053.png" />
+    <Content Include="Images\About\image055.png" />
+    <Content Include="Images\About\image058.gif" />
+    <Content Include="Images\About\image059.jpg" />
+    <Content Include="Images\About\image060.jpg" />
+    <Content Include="Images\About\image061.jpg" />
+    <Content Include="Images\About\image062.jpg" />
+    <Content Include="Images\About\image064.jpg" />
+    <Content Include="Images\About\image065.jpg" />
+    <Content Include="Images\About\image066.jpg" />
+    <Content Include="Images\About\image067.jpg" />
+    <Content Include="Images\About\image068.jpg" />
+    <Content Include="Images\About\image069.jpg" />
+    <Content Include="Images\About\image070.jpg" />
+    <Content Include="Images\About\image071.png" />
+    <Content Include="Images\About\image072.gif" />
+    <Content Include="Images\About\image073.png" />
+    <Content Include="Images\About\image074.gif" />
+    <Content Include="Images\About\image075.gif" />
+    <Content Include="Images\About\image076.gif" />
+    <Content Include="Images\About\image077.gif" />
+    <Content Include="Images\About\image078.gif" />
+    <Content Include="Images\About\image079.gif" />
+    <Content Include="Images\About\image080.gif" />
+    <Content Include="Images\About\image081.gif" />
+    <Content Include="Images\About\image082.gif" />
+    <Content Include="Images\Buttons\home.png" />
+    <Content Include="Images\Buttons\legend.png" />
+    <Content Include="Images\Buttons\menu.png" />
+    <Content Include="Images\Buttons\search.png" />
+    <Content Include="Images\Buttons\search_kato.png" />
+    <Content Include="Images\Buttons\stat.png" />
+    <Content Include="Images\Home\fon.jpg" />
+    <Content Include="Images\Home\fron_fage.jpg" />
+    <Content Include="Images\Home\fron_fage150.jpg" />
+    <Content Include="Images\Home\logo.png" />
+    <Content Include="Images\Maps\burden_pasture.jpg" />
+    <Content Include="Images\Maps\burden_pasture2018.png" />
+    <Content Include="Images\Maps\zemfondpol2018.jpg" />
+    <Content Include="Images\Maps\pasturepol.jpg" />
+    <Content Include="Images\Maps\pasturepol150.jpg" />
+    <Content Include="Images\Maps\pasturepol96.jpg" />
+    <Content Include="Images\Maps\species.jpg" />
+    <Content Include="Images\Maps\wells.jpg" />
+    <Content Include="Images\Maps\zemfondpol.jpg" />
+    <Content Include="Images\Maps\zemfondpol150.jpg" />
+    <Content Include="Images\Maps\zemfondpol96.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Images\About\image057.wmz" />
+    <Content Include="Images\About\image063.wmz" />
+    <Content Include="Pdf\Manual.pdf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\inputmask.js" />
+    <Content Include="Scripts\inputmask.numeric.extensions.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.0.js" />
+    <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.flot.js" />
+    <Content Include="Scripts\jquery.flot.pie.js" />
+    <Content Include="Scripts\jquery.flot.resize.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\jquery.inputmask.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loading.gif" />
+    <Content Include="Scripts\loadingoverlay.js" />
+    <Content Include="Scripts\loadingoverlay.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ol.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Video\Help.mp4" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\CATOes\Create.cshtml" />
+    <Content Include="Views\CATOes\Delete.cshtml" />
+    <Content Include="Views\CATOes\Details.cshtml" />
+    <Content Include="Views\CATOes\Edit.cshtml" />
+    <Content Include="Views\CATOes\Index.cshtml" />
+    <Content Include="Views\CATOes\Upload.cshtml" />
+    <Content Include="Views\PTypes\Create.cshtml" />
+    <Content Include="Views\PTypes\Delete.cshtml" />
+    <Content Include="Views\PTypes\Details.cshtml" />
+    <Content Include="Views\PTypes\Edit.cshtml" />
+    <Content Include="Views\PTypes\Index.cshtml" />
+    <Content Include="Views\Reliefs\Create.cshtml" />
+    <Content Include="Views\Reliefs\Delete.cshtml" />
+    <Content Include="Views\Reliefs\Details.cshtml" />
+    <Content Include="Views\Reliefs\Edit.cshtml" />
+    <Content Include="Views\Reliefs\Index.cshtml" />
+    <Content Include="Views\Zones\Create.cshtml" />
+    <Content Include="Views\Zones\Delete.cshtml" />
+    <Content Include="Views\Zones\Details.cshtml" />
+    <Content Include="Views\Zones\Edit.cshtml" />
+    <Content Include="Views\Zones\Index.cshtml" />
+    <Content Include="Views\PSubTypes\Create.cshtml" />
+    <Content Include="Views\PSubTypes\Delete.cshtml" />
+    <Content Include="Views\PSubTypes\Details.cshtml" />
+    <Content Include="Views\PSubTypes\Edit.cshtml" />
+    <Content Include="Views\PSubTypes\Index.cshtml" />
+    <Content Include="Views\Soobs\Create.cshtml" />
+    <Content Include="Views\Soobs\Delete.cshtml" />
+    <Content Include="Views\Soobs\Details.cshtml" />
+    <Content Include="Views\Soobs\Edit.cshtml" />
+    <Content Include="Views\Soobs\Index.cshtml" />
+    <Content Include="Views\Recommends\Create.cshtml" />
+    <Content Include="Views\Recommends\Delete.cshtml" />
+    <Content Include="Views\Recommends\Details.cshtml" />
+    <Content Include="Views\Recommends\Edit.cshtml" />
+    <Content Include="Views\Recommends\Index.cshtml" />
+    <Content Include="Views\RecomCattles\Create.cshtml" />
+    <Content Include="Views\RecomCattles\Delete.cshtml" />
+    <Content Include="Views\RecomCattles\Details.cshtml" />
+    <Content Include="Views\RecomCattles\Edit.cshtml" />
+    <Content Include="Views\RecomCattles\Index.cshtml" />
+    <Content Include="Views\pasture_shps\Create.cshtml" />
+    <Content Include="Views\pasture_shps\Delete.cshtml" />
+    <Content Include="Views\pasture_shps\Details.cshtml" />
+    <Content Include="Views\pasture_shps\Edit.cshtml" />
+    <Content Include="Views\pasture_shps\Index.cshtml" />
+    <Content Include="Views\Maps\FodderResources.cshtml" />
+    <Content Include="Views\pasture_tabs\Create.cshtml" />
+    <Content Include="Views\pasture_tabs\Delete.cshtml" />
+    <Content Include="Views\pasture_tabs\Details.cshtml" />
+    <Content Include="Views\pasture_tabs\Edit.cshtml" />
+    <Content Include="Views\pasture_tabs\Index.cshtml" />
+    <Content Include="Views\pasture_tabs\Upload.cshtml" />
+    <Content Include="Views\Maps\Index.cshtml" />
+    <Content Include="Views\Hayings\Create.cshtml" />
+    <Content Include="Views\Hayings\Delete.cshtml" />
+    <Content Include="Views\Hayings\Details.cshtml" />
+    <Content Include="Views\Hayings\Edit.cshtml" />
+    <Content Include="Views\Hayings\Index.cshtml" />
+    <Content Include="Views\Otdels\Create.cshtml" />
+    <Content Include="Views\Otdels\Delete.cshtml" />
+    <Content Include="Views\Otdels\Details.cshtml" />
+    <Content Include="Views\Otdels\Edit.cshtml" />
+    <Content Include="Views\Otdels\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
+    <Content Include="Views\Maps\LandSupply.cshtml" />
+    <Content Include="Views\ZTypes\Create.cshtml" />
+    <Content Include="Views\ZTypes\Delete.cshtml" />
+    <Content Include="Views\ZTypes\Details.cshtml" />
+    <Content Include="Views\ZTypes\Edit.cshtml" />
+    <Content Include="Views\ZTypes\Index.cshtml" />
+    <Content Include="Views\DominantTypes\Create.cshtml" />
+    <Content Include="Views\DominantTypes\Delete.cshtml" />
+    <Content Include="Views\DominantTypes\Details.cshtml" />
+    <Content Include="Views\DominantTypes\Edit.cshtml" />
+    <Content Include="Views\DominantTypes\Index.cshtml" />
+    <Content Include="Views\DominantTypes\Upload.cshtml" />
+    <Content Include="Views\ZSubTypes\Create.cshtml" />
+    <Content Include="Views\ZSubTypes\Delete.cshtml" />
+    <Content Include="Views\ZSubTypes\Details.cshtml" />
+    <Content Include="Views\ZSubTypes\Edit.cshtml" />
+    <Content Include="Views\ZSubTypes\Index.cshtml" />
+    <Content Include="Views\Camels\Create.cshtml" />
+    <Content Include="Views\Camels\Delete.cshtml" />
+    <Content Include="Views\Camels\Details.cshtml" />
+    <Content Include="Views\Camels\Edit.cshtml" />
+    <Content Include="Views\Camels\Index.cshtml" />
+    <Content Include="Views\Cattle\Create.cshtml" />
+    <Content Include="Views\Cattle\Delete.cshtml" />
+    <Content Include="Views\Cattle\Details.cshtml" />
+    <Content Include="Views\Cattle\Edit.cshtml" />
+    <Content Include="Views\Cattle\Index.cshtml" />
+    <Content Include="Views\SmallCattles\Create.cshtml" />
+    <Content Include="Views\SmallCattles\Delete.cshtml" />
+    <Content Include="Views\SmallCattles\Details.cshtml" />
+    <Content Include="Views\SmallCattles\Edit.cshtml" />
+    <Content Include="Views\SmallCattles\Index.cshtml" />
+    <Content Include="Views\Horses\Create.cshtml" />
+    <Content Include="Views\Horses\Delete.cshtml" />
+    <Content Include="Views\Horses\Details.cshtml" />
+    <Content Include="Views\Horses\Edit.cshtml" />
+    <Content Include="Views\Horses\Index.cshtml" />
+    <Content Include="Views\CATOSpecies\Create.cshtml" />
+    <Content Include="Views\CATOSpecies\Delete.cshtml" />
+    <Content Include="Views\CATOSpecies\Details.cshtml" />
+    <Content Include="Views\CATOSpecies\Edit.cshtml" />
+    <Content Include="Views\CATOSpecies\Index.cshtml" />
+    <Content Include="Views\CATOSpecies\Upload.cshtml" />
+    <Content Include="Views\Maps\Species.cshtml" />
+    <Content Include="Views\WTypes\Create.cshtml" />
+    <Content Include="Views\WTypes\Delete.cshtml" />
+    <Content Include="Views\WTypes\Details.cshtml" />
+    <Content Include="Views\WTypes\Edit.cshtml" />
+    <Content Include="Views\WTypes\Index.cshtml" />
+    <Content Include="Views\ChemicalComps\Create.cshtml" />
+    <Content Include="Views\ChemicalComps\Delete.cshtml" />
+    <Content Include="Views\ChemicalComps\Details.cshtml" />
+    <Content Include="Views\ChemicalComps\Edit.cshtml" />
+    <Content Include="Views\ChemicalComps\Index.cshtml" />
+    <Content Include="Views\WSubTypes\Create.cshtml" />
+    <Content Include="Views\WSubTypes\Delete.cshtml" />
+    <Content Include="Views\WSubTypes\Details.cshtml" />
+    <Content Include="Views\WSubTypes\Edit.cshtml" />
+    <Content Include="Views\WSubTypes\Index.cshtml" />
+    <Content Include="Views\Maps\Wells.cshtml" />
+    <Content Include="Views\BurOtdels\Create.cshtml" />
+    <Content Include="Views\BurOtdels\Delete.cshtml" />
+    <Content Include="Views\BurOtdels\Details.cshtml" />
+    <Content Include="Views\BurOtdels\Edit.cshtml" />
+    <Content Include="Views\BurOtdels\Index.cshtml" />
+    <Content Include="Views\BTypes\Create.cshtml" />
+    <Content Include="Views\BTypes\Delete.cshtml" />
+    <Content Include="Views\BTypes\Details.cshtml" />
+    <Content Include="Views\BTypes\Edit.cshtml" />
+    <Content Include="Views\BTypes\Index.cshtml" />
+    <Content Include="Views\BurSubOtdels\Create.cshtml" />
+    <Content Include="Views\BurSubOtdels\Delete.cshtml" />
+    <Content Include="Views\BurSubOtdels\Details.cshtml" />
+    <Content Include="Views\BurSubOtdels\Edit.cshtml" />
+    <Content Include="Views\BurSubOtdels\Index.cshtml" />
+    <Content Include="Views\BClasses\Create.cshtml" />
+    <Content Include="Views\BClasses\Delete.cshtml" />
+    <Content Include="Views\BClasses\Details.cshtml" />
+    <Content Include="Views\BClasses\Edit.cshtml" />
+    <Content Include="Views\BClasses\Index.cshtml" />
+    <Content Include="Views\BGroups\Create.cshtml" />
+    <Content Include="Views\BGroups\Delete.cshtml" />
+    <Content Include="Views\BGroups\Details.cshtml" />
+    <Content Include="Views\BGroups\Edit.cshtml" />
+    <Content Include="Views\BGroups\Index.cshtml" />
+    <Content Include="Views\Maps\PasturesBurden.cshtml" />
+    <Content Include="Views\Account\EmailNotConfirmed.cshtml" />
+    <Content Include="Views\WClasses\Create.cshtml" />
+    <Content Include="Views\WClasses\Delete.cshtml" />
+    <Content Include="Views\WClasses\Details.cshtml" />
+    <Content Include="Views\WClasses\Edit.cshtml" />
+    <Content Include="Views\WClasses\Index.cshtml" />
+    <Content Include="Views\SupplyRecommends\Create.cshtml" />
+    <Content Include="Views\SupplyRecommends\Delete.cshtml" />
+    <Content Include="Views\SupplyRecommends\Details.cshtml" />
+    <Content Include="Views\SupplyRecommends\Edit.cshtml" />
+    <Content Include="Views\SupplyRecommends\Index.cshtml" />
+    <Content Include="Views\Home\Instruction.cshtml" />
+    <Content Include="Views\STypes\Create.cshtml" />
+    <Content Include="Views\STypes\Delete.cshtml" />
+    <Content Include="Views\STypes\Details.cshtml" />
+    <Content Include="Views\STypes\Edit.cshtml" />
+    <Content Include="Views\STypes\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607040836205_CATO.resx">
+      <DependentUpon>201607040836205_CATO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607040946233_pasture_shp.resx">
+      <DependentUpon>201607040946233_pasture_shp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607130753449_pasture_shp1.resx">
+      <DependentUpon>201607130753449_pasture_shp1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200542369_PType.resx">
+      <DependentUpon>201607200542369_PType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200729038_Relief.resx">
+      <DependentUpon>201607200729038_Relief.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200744187_Zone.resx">
+      <DependentUpon>201607200744187_Zone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200811303_PSubType.resx">
+      <DependentUpon>201607200811303_PSubType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200829202_Soob.resx">
+      <DependentUpon>201607200829202_Soob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607200927385_Recommend.resx">
+      <DependentUpon>201607200927385_Recommend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607210306438_RecomCattle.resx">
+      <DependentUpon>201607210306438_RecomCattle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607220439341_pasture_shp2.resx">
+      <DependentUpon>201607220439341_pasture_shp2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607250856419_pasture_tab.resx">
+      <DependentUpon>201607250856419_pasture_tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608030545289_pasture_shp3.resx">
+      <DependentUpon>201608030545289_pasture_shp3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608080435246_pasturepol.resx">
+      <DependentUpon>201608080435246_pasturepol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608080531045_PType1.resx">
+      <DependentUpon>201608080531045_PType1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608080549210_Haying.resx">
+      <DependentUpon>201608080549210_Haying.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608080556597_Otdel.resx">
+      <DependentUpon>201608080556597_Otdel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120855214_ZType.resx">
+      <DependentUpon>201608120855214_ZType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120918545_DominantType.resx">
+      <DependentUpon>201608120918545_DominantType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120957289_ZSubType.resx">
+      <DependentUpon>201608120957289_ZSubType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121031526_zemfondpol.resx">
+      <DependentUpon>201608121031526_zemfondpol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608140544266_ZType1.resx">
+      <DependentUpon>201608140544266_ZType1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608140928430_Camel.resx">
+      <DependentUpon>201608140928430_Camel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608151156460_Cattle.resx">
+      <DependentUpon>201608151156460_Cattle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160310358_Horse.resx">
+      <DependentUpon>201608160310358_Horse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160512340_species.resx">
+      <DependentUpon>201608160512340_species.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160514160_species1.resx">
+      <DependentUpon>201608160514160_species1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160529345_species2.resx">
+      <DependentUpon>201608160529345_species2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160603350_species3.resx">
+      <DependentUpon>201608160603350_species3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160746401_CATOSpecies.resx">
+      <DependentUpon>201608160746401_CATOSpecies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608220615258_WType.resx">
+      <DependentUpon>201608220615258_WType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608220746288_ChemicalComp.resx">
+      <DependentUpon>201608220746288_ChemicalComp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608220756029_WSubType.resx">
+      <DependentUpon>201608220756029_WSubType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608220847338_wellspnt.resx">
+      <DependentUpon>201608220847338_wellspnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240609256_BurOtdel.resx">
+      <DependentUpon>201608240609256_BurOtdel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240706398_BType.resx">
+      <DependentUpon>201608240706398_BType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240725030_BurSubOtdel.resx">
+      <DependentUpon>201608240725030_BurSubOtdel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240736545_BClass.resx">
+      <DependentUpon>201608240736545_BClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240754336_BGroup.resx">
+      <DependentUpon>201608240754336_BGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608260517311_burden_pasture.resx">
+      <DependentUpon>201608260517311_burden_pasture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608310944563_SpeciesNew.resx">
+      <DependentUpon>201608310944563_SpeciesNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608310950499_SpeciesNew1.resx">
+      <DependentUpon>201608310950499_SpeciesNew1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010239447_PasturesNew.resx">
+      <DependentUpon>201609010239447_PasturesNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010316260_PasturesNew1.resx">
+      <DependentUpon>201609010316260_PasturesNew1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010415231_SpeciesOld.resx">
+      <DependentUpon>201609010415231_SpeciesOld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010429396_SpeciesOld1.resx">
+      <DependentUpon>201609010429396_SpeciesOld1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010535346_SpeciesNew2.resx">
+      <DependentUpon>201609010535346_SpeciesNew2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191322432_WClass.resx">
+      <DependentUpon>201609191322432_WClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191349023_wellspol.resx">
+      <DependentUpon>201609191349023_wellspol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609260820452_pasturestat.resx">
+      <DependentUpon>201609260820452_pasturestat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609260842155_pasturestat1.resx">
+      <DependentUpon>201609260842155_pasturestat1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803081000172_Soob1.resx">
+      <DependentUpon>201803081000172_Soob1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091632441_SupplyRecommend.resx">
+      <DependentUpon>201803091632441_SupplyRecommend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803200609378_SType.resx">
+      <DependentUpon>201803200609378_SType.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51178</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51178/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

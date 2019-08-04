@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Pastures.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+    <h2>Пользователи</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Roles)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @for (int i = 0; i < item.Roles.Count; i++)
+                    {
+                        if (i < item.Roles.Count - 1)
+                        {
+                            <text>
+                                @Html.Raw(item.Roles[i] + ", ")
+                            </text>
+                        }
+                        else
+                        {
+                            <text>
+                                @Html.Raw(item.Roles[i])
+                            </text>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

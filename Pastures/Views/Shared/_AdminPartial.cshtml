@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        if (ViewBag.AdminIndex ?? false)
+        {
+            <li>@Html.ActionLink("Администрирование", "Index", "Admin", null, new { style = "font-weight:bold" })</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Администрирование", "Index", "Admin")</li>
+        }
+    }
+}

@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Pastures.Models.pasture_tab>
+
+@{
+    ViewBag.Title = "Кормовые ресурсы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Кормовые ресурсы</h2>
+
+<p>
+    @*@Html.ActionLink("Создать", "Create")*@ @Html.ActionLink("Загрузить из файлов", "Upload")
+</p>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.objectid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.relief_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zone_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subtype_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soob_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ur_v)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ur_l)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ur_o)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ur_z)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.korm_v)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.korm_l)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.korm_o)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.korm_z)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recom_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recom_cat_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.haying)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idfrommap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dopznk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catoid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.objectid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relief_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zone_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subtype_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soob_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ur_v)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ur_l)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ur_o)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ur_z)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korm_v)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korm_l)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korm_o)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korm_z)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recom_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recom_cat_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.haying)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idfrommap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dopznk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.catoid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>*@

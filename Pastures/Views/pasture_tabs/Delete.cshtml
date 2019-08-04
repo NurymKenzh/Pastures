@@ -1,0 +1,201 @@
+﻿@model Pastures.Models.pasture_tab
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>pasture_tab</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.objectid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objectid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.relief_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.relief_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zone_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zone_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subtype_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subtype_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soob_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soob_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ur_v)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ur_v)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ur_l)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ur_l)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ur_o)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ur_o)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ur_z)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ur_z)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.korm_v)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.korm_v)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.korm_l)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.korm_l)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.korm_o)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.korm_o)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.korm_z)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.korm_z)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recom_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recom_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recom_cat_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recom_cat_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.haying)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.haying)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idfrommap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idfrommap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dopznk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dopznk)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.catoid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catoid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

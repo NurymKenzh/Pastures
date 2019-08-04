@@ -1,0 +1,55 @@
+﻿@model Pastures.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Редактировать";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+    <h2>Редактировать</h2>
+
+
+    @using (Html.BeginForm("Edit", "Admin"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Пользователь</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Raw(Model.Email)
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @foreach (string role in ViewBag.Roles)
+                    {
+                        <input type="checkbox" name="Roles" value="@role"
+                               @(Model.Roles.Contains(role) ? "checked=\"checked\"" : "") />@role <br />
+                        }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Обратно к списку", "Users")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

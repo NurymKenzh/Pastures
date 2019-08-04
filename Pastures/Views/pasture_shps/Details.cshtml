@@ -1,0 +1,83 @@
+﻿@model Pastures.Models.pasture_shp
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pasture_shp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.objectid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objectid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.relief_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.relief_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zone_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zone_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subtype_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subtype_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soob_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soob_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.catoid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catoid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.gid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

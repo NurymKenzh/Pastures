@@ -1,0 +1,55 @@
+﻿@model PagedList.IPagedList<Pastures.Models.SupplyRecommend>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Рекомендации по сезонам (Земли запаса)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Рекомендации по сезонам (Земли запаса)</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create")
+</p>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, SortOrder = Request.QueryString["SortOrder"], Code = ViewBag.CodeFilter, Description = ViewBag.DescriptionFilter }), new PagedListRenderOptions() { PageCountAndCurrentLocationFormat = "{0} / {1}", DisplayPageCountAndCurrentLocation = true })
+
+@using (Html.BeginForm("Index", "SupplyRecommends", new { SortOrder = Request.QueryString["SortOrder"], Code = ViewBag.CodeFilter, Transcript = ViewBag.TranscriptFilter }, FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Код", "Index", new { SortOrder = ViewBag.CodeSort, Code = ViewBag.CodeFilter, Description = ViewBag.DescriptionFilter })
+                <br />
+                @Html.Editor("Code", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
+            </th>
+            <th>
+                @Html.ActionLink("Описание", "Index", new { SortOrder = ViewBag.DescriptionSort, Code = ViewBag.CodeFilter, Description = ViewBag.DescriptionFilter })
+                <br />
+                @Html.Editor("Description", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
+            </th>
+            <th>
+                <br />
+                <input type="submit" value="Найти" class="btn btn-default">
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

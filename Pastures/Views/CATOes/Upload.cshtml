@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Загрузить из файлов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Загрузить из файлов</h2>
+
+@using (Html.BeginForm("Upload", "CATOes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <h4>КАТО</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.Label("Файлы", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="multiple" name="Files" multiple />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Загрузить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Report != null)
+{
+    if (ViewBag.Report != "")
+    {
+        @Html.Raw(ViewBag.Report)
+    }
+}
+
+<div>
+    @Html.ActionLink("Обратно к списку", "Index")
+</div>

@@ -1,0 +1,177 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Pastures.Models;
+using PagedList;
+
+namespace Pastures.Controllers
+{
+    public class HayingsController : Controller
+    {
+        private NpgsqlContext db = new NpgsqlContext();
+
+        // GET: Hayings
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Index(string SortOrder, int? Code, string Description, int? Page)
+        {
+            var hayings = db.Hayings
+                .Where(h => true);
+
+            ViewBag.CodeFilter = Code;
+            ViewBag.DescriptionFilter = Description;
+
+            ViewBag.CodeSort = SortOrder == "Code" ? "CodeDesc" : "Code";
+            ViewBag.DescriptionSort = SortOrder == "Description" ? "DescriptionDesc" : "Description";
+
+            if (Code != null)
+            {
+                hayings = hayings.Where(h => h.Code == Code);
+            }
+            if (!string.IsNullOrEmpty(Description))
+            {
+                hayings = hayings.Where(h => h.Description.Contains(Description));
+            }
+
+            switch (SortOrder)
+            {
+                case "Code":
+                    hayings = hayings.OrderBy(h => h.Code);
+                    break;
+                case "CodeDesc":
+                    hayings = hayings.OrderByDescending(h => h.Code);
+                    break;
+                case "Description":
+                    hayings = hayings.OrderBy(h => h.Description);
+                    break;
+                case "DescriptionDesc":
+                    hayings = hayings.OrderByDescending(h => h.Description);
+                    break;
+                default:
+                    hayings = hayings.OrderBy(h => h.Id);
+                    break;
+            }
+
+            int PageSize = 50;
+            int PageNumber = (Page ?? 1);
+
+            return View(hayings.ToPagedList(PageNumber, PageSize));
+        }
+
+        // GET: Hayings/Details/5
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Haying haying = await db.Hayings.FindAsync(id);
+            if (haying == null)
+            {
+                return HttpNotFound();
+            }
+            return View(haying);
+        }
+
+        // GET: Hayings/Create
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Hayings/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Create([Bind(Include = "Id,Code,Description")] Haying haying)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Hayings.Add(haying);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(haying);
+        }
+
+        // GET: Hayings/Edit/5
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Haying haying = await db.Hayings.FindAsync(id);
+            if (haying == null)
+            {
+                return HttpNotFound();
+            }
+            return View(haying);
+        }
+
+        // POST: Hayings/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Code,Description")] Haying haying)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(haying).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(haying);
+        }
+
+        // GET: Hayings/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Haying haying = await db.Hayings.FindAsync(id);
+            if (haying == null)
+            {
+                return HttpNotFound();
+            }
+            return View(haying);
+        }
+
+        // POST: Hayings/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Moderator")]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Haying haying = await db.Hayings.FindAsync(id);
+            db.Hayings.Remove(haying);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

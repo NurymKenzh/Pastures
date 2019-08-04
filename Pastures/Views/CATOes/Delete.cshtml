@@ -1,0 +1,81 @@
+﻿@model Pastures.Models.CATO
+
+@{
+    ViewBag.Title = "Удалить";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удалить</h2>
+
+<h3>Удалить?</h3>
+<div>
+    <h4>КАТО</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HIJ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HIJ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.K)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.K)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameKZ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameKZ)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Обратно к списку", "Index")
+        </div>
+    }
+</div>

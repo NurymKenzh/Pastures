@@ -1,0 +1,1471 @@
+﻿
+@{
+    ViewBag.Title = "Нагрузка сельскохозяйственных животных на пастбища";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.0.js"></script>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+<link href="~/Content/ol.css" rel="stylesheet" />
+<script src="~/Scripts/ol.js"></script>
+
+<script src="~/Scripts/inputmask.js"></script>
+<script src="~/Scripts/jquery.inputmask.js"></script>
+<script src="~/Scripts/inputmask.numeric.extensions.js"></script>
+
+<script src="~/Scripts/loadingoverlay.js"></script>
+
+<style>
+    .ui-dialog,
+    .ui-dialog:before,
+    .ui-dialog:after {
+        box-sizing: content-box;
+    }
+
+    .toppanel {
+        height: 70px;
+        background-color: darkgreen;
+    }
+
+    .sidepanel {
+        background: #d2d2d2;
+        width: 350px;
+        height: 100%;
+        float: right;
+        overflow: auto;
+    }
+
+    .sidepanel-hide {
+        top: .5em;
+        right: .5em;
+    }
+
+    .map {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .split {
+        height: 40px;
+        background-color: #77ab3f;
+        color: #ffffff;
+        cursor: pointer;
+        border: 1px solid black;
+        border-color: #d2d2d2;
+    }
+
+    .show {
+        font-weight: normal;
+        display: block;
+    }
+
+    .transparancy {
+        font-weight: normal;
+    }
+
+    .ol-attribution ul {
+        font-size: 1rem;
+    }
+
+    #layertree li > span {
+        cursor: pointer;
+        color: #444444;
+        font-weight: bold;
+    }
+</style>
+
+@* Карта *@
+<div id="maindiv">
+    <div class="toppanel" style="background: url(../Images/Home/fon.jpg) repeat top left;">
+        <div style="height: 40px; float: left; margin-top: 10px;width: 71%;">
+            <label style="padding: 10px; color: white; font-size: 24px;">
+                Нагрузка сельскохозяйственных животных на пастбища РК
+            </label>
+        </div>
+        <div style="float: right; margin-top: 10px;width: 29%;max-height: 40px;">
+            <div>
+                <input type="button" title="Меню" class="btn btn-default" onclick="ShowSidePanel()" style="background: url(../Images/Buttons/menu.png) no-repeat top left; background-size: contain; float: right; width: 39px; height: 40px; margin: 6px; margin-right: 12px;" />
+                <input type="button" title="Домой" class="btn btn-default" onclick="ToHome()" style="background: url(../Images/Buttons/home.png) no-repeat top left; background-size: contain; float: right; width: 39px; height: 40px; margin: 6px;" />
+                <input type="button" title="Поиск пастбищ" class="btn btn-default" onclick="ShowFind()" style="background: url(../Images/Buttons/search.png) no-repeat top left; background-size: contain; float: right; width: 39px; height: 40px; margin: 6px;" />
+                <input type="button" title="Поиск области, района, сельского округа" class="btn btn-default" onclick="ShowFindKATO()" style="background: url(../Images/Buttons/search_kato.png) no-repeat top left; background-size: contain; float: right; width: 39px; height: 40px; margin: 6px;" />
+                <input type="button" title="Легенда" class="btn btn-default" onclick="Legend()" style="background: url(../Images/Buttons/legend.png) no-repeat top left; background-size: contain; float: right; width: 39px; height: 40px; margin: 6px;" />
+                @Html.DropDownList("MapSources", (IEnumerable<SelectListItem>)ViewBag.MapSources, htmlAttributes: new { @id = "MapSources", @class = "form-control", @style = "float: right; margin: 6px; width: 180px;", @onchange = "ChangeMapSource(this.value)" })
+            </div>
+        </div>
+    </div>
+    <div id="mapsidepanel" style="margin-bottom: 10px; width: 100%;">
+        <div id="sidepanel" class="sidepanel">
+            @* Слои *@
+            <div class="split" id="title_layers">
+                <label class="split_label">
+                    <u>
+                        Слои
+                    </u>
+                </label>
+            </div>
+            <div id="layertree" style="margin-top: 10px;">
+                <ul>
+                    <li>
+                        <span>
+                            <u>
+                                Базовые слои
+                            </u>
+                        </span>
+                        @*<fieldset id="layer0">
+                                <label class="checkbox" for="visible0">
+                                    <input id="visible0" class="visible" type="checkbox" />Отображать
+                                </label>
+                                <label>Прозрачность</label>
+                                <input class="opacity" type="range" min="0" max="100" step="1" />
+                            </fieldset>*@
+                        <ul>
+                            <li>
+                                <span>
+                                    <label>
+                                        <u>
+                                            Населенные пункты
+                                        </u>
+                                    </label>
+                                </span>
+                                <fieldset id="layer8">
+                                    <label class="checkbox" for="visible8">
+                                        <input id="visible8" class="visible" type="checkbox" />Отображать
+                                    </label>
+                                    <label>Прозрачность</label>
+                                    <input class="opacity" type="range" min="0" max="100" step="1" />
+                                </fieldset>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>
+                                        <u>
+                                            Области, районы, сельские округа
+                                        </u>
+                                    </label>
+                                </span>
+                                <fieldset id="layer6">
+                                    <label class="checkbox" for="visible6">
+                                        <input id="visible6" class="visible" type="checkbox" />Отображать
+                                    </label>
+                                    <label>Прозрачность</label>
+                                    <input class="opacity" type="range" min="0" max="100" step="1" />
+                                </fieldset>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>
+                                        <u>
+                                            Дороги
+                                        </u>
+                                    </label>
+                                </span>
+                                <fieldset id="layer5">
+                                    <label class="checkbox" for="visible5">
+                                        <input id="visible5" class="visible" type="checkbox" />Отображать
+                                    </label>
+                                    <label>Прозрачность</label>
+                                    <input class="opacity" type="range" min="0" max="100" step="1" />
+                                </fieldset>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>
+                                        <u>
+                                            Реки, озера
+                                        </u>
+                                    </label>
+                                </span>
+                                <fieldset id="layer10">
+                                    <label class="checkbox" for="visible10">
+                                        <input id="visible10" class="visible" type="checkbox" />Отображать
+                                    </label>
+                                    <label>Прозрачность</label>
+                                    <input class="opacity" type="range" min="0" max="100" step="1" />
+                                </fieldset>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>
+                            <u>
+                                Нагрузка сельскохозяйственных животных на пастбища
+                            </u>
+                        </span>
+                        <fieldset id="layer1">
+                            <label class="checkbox" for="visible1">
+                                <input id="visible1" class="visible" type="checkbox" />Отображать
+                            </label>
+                            <label>Прозрачность</label>
+                            <input class="opacity" type="range" min="0" max="100" step="1" />
+                        </fieldset>
+                    </li>
+                    <li>
+                        <span>
+                            <u>
+                                Фон
+                            </u>
+                        </span>
+                        <fieldset id="layer0">
+                            <label class="checkbox" for="visible0">
+                                <input id="visible0" class="visible" type="checkbox" />Отображать
+                            </label>
+                            <label>Прозрачность</label>
+                            <input class="opacity" type="range" min="0" max="100" step="1" />
+                        </fieldset>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="map" id="map_swipe">
+            <input id="swipe" type="range" style="width: 100%; max-width: 100%;" value="100" hidden="hidden">
+            <div id="map" class="map" style="height: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Окно информации о пастбище *@
+<div id="dialog_info_pasture" title="Информация" hidden="hidden" style="box-sizing: content-box;">
+    <table>
+        <tr>
+            <td>
+                № выдела
+            </td>
+            <td id="info_num_vydel" style="padding-left: 10px;"></td>
+        </tr>
+        @*<tr>
+                <td>
+                    Нормы нагрузки
+                </td>
+                <td id="info_rule_grazi" style="padding-left: 10px;"></td>
+            </tr>*@
+        <tr>
+            <td>
+                Отдел пастбищ
+            </td>
+            <td id="info_bur_otdel" style="padding-left: 10px;"></td>
+        </tr>
+        <tr>
+            <td>
+                Зональный тип
+            </td>
+            <td id="info_bur_type_i" style="padding-left: 10px;"></td>
+        </tr>
+        <tr>
+            <td>
+                Подотдел
+            </td>
+            <td id="info_bur_subotd" style="padding-left: 10px;"></td>
+        </tr>
+        <tr>
+            <td>
+                Класс пастбища
+            </td>
+            <td id="info_bur_class_" style="padding-left: 10px;"></td>
+        </tr>
+        <tr>
+            <td>
+                Группа пастбища
+            </td>
+            <td id="info_bur_group_" style="padding-left: 10px;"></td>
+        </tr>
+        @*<tr>
+            <td>
+                Средняя урожайность, ц/га
+            </td>
+            <td id="info_average_yi" style="padding-left: 10px;"></td>
+        </tr>*@
+        <tr>
+            <td>
+                Норма пастбищной нагрузки на фоновые пастбища, усл. гол. / 100 га
+            </td>
+            <td id="info_burden_gro" style="padding-left: 10px;"></td>
+        </tr>
+        <tr>
+            <td>
+                Норма пастбищной нагрузки на деградированные пастбища, усл. гол. / 100 га
+            </td>
+            <td id="info_burden_deg" style="padding-left: 10px;"></td>
+        </tr>
+    </table>
+</div>
+
+@* Окно поиска *@
+<div id="dialog_find_pasture" title="Поиск пастбищ" hidden="hidden" style="box-sizing: content-box;">
+    <table>
+        <tr>
+            <td>
+                № выдела
+            </td>
+            <td style="padding-left: 10px;">
+                <input type="text" id="find_num_vydel" class="form-control" style="display: inline;" />
+            </td>
+        </tr>
+        @*<tr>
+                <td>
+                    Нормы нагрузки
+                </td>
+                <td style="padding-left: 10px;">
+                    <input type="text" id="find_rule_grazi" class="form-control" style="display: inline;" />
+                </td>
+            </tr>*@
+        <tr>
+            <td>
+                Отдел пастбищ
+            </td>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("BurOtdel", (IEnumerable<SelectListItem>)ViewBag.BurOtdels, "", htmlAttributes: new { @class = "form-control", @id = "find_BurOtdel" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Зональный тип
+            </td>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("BType", (IEnumerable<SelectListItem>)ViewBag.BTypes, "", htmlAttributes: new { @class = "form-control", @id = "find_BType" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Подотдел
+            </td>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("BurSubOtdel", (IEnumerable<SelectListItem>)ViewBag.BurSubOtdels, "", htmlAttributes: new { @class = "form-control", @id = "find_BurSubOtdel" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Класс пастбища
+            </td>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("BClass", (IEnumerable<SelectListItem>)ViewBag.BClasses, "", htmlAttributes: new { @class = "form-control", @id = "find_BClass" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Группа пастбища
+            </td>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("BGroup", (IEnumerable<SelectListItem>)ViewBag.BGroups, "", htmlAttributes: new { @class = "form-control", @id = "find_BGroup" })
+            </td>
+        </tr>
+        @*<tr>
+            <td>
+                Средняя урожайность, ц/га
+            </td>
+            <td style="padding-left: 10px;">
+                <input type="text" id="find_average_yi_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_average_yi_2" class="form-control" style="width: 70px; display: inline;" />
+            </td>
+        </tr>*@
+        <tr>
+            <td>
+                Норма пастбищной нагрузки на фоновые пастбища, усл. гол. / 100 га
+            </td>
+            <td style="padding-left: 10px;">
+                <input type="text" id="find_burden_gro_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_burden_gro_2" class="form-control" style="width: 70px; display: inline;" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Норма пастбищной нагрузки на деградированные пастбища, усл. гол. / 100 га
+            </td>
+            <td style="padding-left: 10px;">
+                <input type="text" id="find_burden_deg_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_burden_deg_2" class="form-control" style="width: 70px; display: inline;" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input type="button" value="Найти" name="Action" onclick="Find();" class="btn btn-default" />
+</div>
+
+@* Окно поиска КАТО *@
+<div id="dialog_find_kato" title="Поиск области, района, сельского округа" hidden="hidden" style="box-sizing: content-box;">
+    <table>
+        <tr>
+            <td style="padding-left: 10px;">
+                @Html.DropDownList("catoobl", null, "", htmlAttributes: new { @Id = "catoobl", @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td id="CATOray" style="padding-left: 10px;">
+                @Html.DropDownList("catoray", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @Id = "catoray", @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td id="CATOsok" style="padding-left: 10px;">
+                @Html.DropDownList("catosok", Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @Id = "catosok", @class = "form-control" })
+            </td>
+        </tr>
+    </table>
+</div>
+
+@* Окно легенды *@
+<div id="dialog_legend" title="Легенда" hidden="hidden" style="box-sizing: content-box;">
+    <img src="~/Images/Maps/burden_pasture2018.png" style="width:550px;" />
+</div>
+
+<div hidden="hidden">
+    @*<input id="WWW" value="@ViewBag.WWW" />*@
+</div>
+
+<script>
+    $("#maindiv").LoadingOverlay("show");
+
+    var WWW = window.location.hostname;
+
+    var dialog_info_burden_pasture_first = true;
+    var dialog_find_burden_pasture_first = true;
+    var dialog_find_kato_first = true;
+    var dialog_legend_first = true;
+
+    // слой базовый
+    var Layer_Base = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
+    //// источник данных и слой дорог, населенных пунктов, водоемов
+    //var Source_base2 = new ol.source.ImageWMS({
+    //    url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+    //    params: {
+    //        'LAYERS': 'Pastures:base2',
+    //        'VERSION': '1.1.0',
+    //        'FORMAT': 'image/png',
+    //        //'TILED': true
+    //    },
+    //    serverType: 'geoserver'
+    //});
+    //var Layer_base2 =
+    //    new ol.layer.Image({
+    //        source: Source_base2
+    //    });
+
+    // источник данных и слой Гидрография (линии)
+    var Source_hdrlin = new ol.source.TileWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:hdrlin',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrlin =
+        new ol.layer.Tile({
+            source: Source_hdrlin
+        });
+
+    // источник данных и слой Гидрография (полигоны)
+    var Source_hdrpol = new ol.source.ImageWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:hdrpol',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrpol =
+        new ol.layer.Image({
+            source: Source_hdrpol
+        });
+
+    // источник данных и слой Населённые пункты (точки)
+    var Source_poppnt = new ol.source.TileWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:poppnt',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppnt =
+        new ol.layer.Tile({
+            source: Source_poppnt
+        });
+
+    // источник данных и слой Населённые пункты (полигоны)
+    var Source_poppol = new ol.source.ImageWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:poppol',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppol =
+        new ol.layer.Image({
+            source: Source_poppol
+        });
+
+    // источник данных и слой Автодороги и пути (линии)
+    var Source_rdslin = new ol.source.TileWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:rdslin',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_rdslin =
+        new ol.layer.Tile({
+            source: Source_rdslin
+        });
+
+    // источник данных и слой adm123pol
+    var Source_adm123pol = new ol.source.TileWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:adm123pol',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm123pol =
+        new ol.layer.Tile({
+            source: Source_adm123pol
+        });
+
+    // векторный слой для поиска КАТО
+    var Source_select_cato = new ol.source.Vector({});
+    var Layer_select_cato = new ol.layer.Vector({
+        source: Source_select_cato,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'transparent'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 4
+            })
+        })
+    });
+
+    // источник данных и слой burden_pasture
+    var Source_burden_pasture = new ol.source.ImageWMS({
+        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        params: {
+            'LAYERS': 'Pastures:burden_pasture',
+            'VERSION': '1.1.0',
+            'FORMAT': 'image/png',
+            //'TILED': true
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_burden_pasture =
+        new ol.layer.Image({
+            source: Source_burden_pasture
+        });
+
+    // векторный слой выбранных пастбищ
+    var Source_select_burden_pasture = new ol.source.Vector({});
+    var Layer_select_burden_pasture = new ol.layer.Vector({
+        source: Source_select_burden_pasture,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+
+    // векторный слой найденных пастбищ
+    var Source_found_burden_pasture = new ol.source.Vector({});
+    var Layer_found_burden_pasture = new ol.layer.Vector({
+        source: Source_found_burden_pasture,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 0, 0.6]
+            }),
+            stroke: new ol.style.Stroke({
+                color: [0, 0, 255, 1],
+                width: 2
+            })
+        })
+    });
+
+    // векторный слой пастбищ (не отображается на карте)
+    var Layer_burden_pasture_v = new ol.layer.Vector();
+    // векторный слой областей (не отображается на карте)
+    var Layer_adm1pol_v = new ol.layer.Vector();
+    // векторный слой районов (не отображается на карте)
+    var Layer_adm2pol_v = new ol.layer.Vector();
+    // векторный слой сельских округов (не отображается на карте)
+    var Layer_adm3pol_v = new ol.layer.Vector();
+    // векторный слой пастбищ
+    var url_burden_pasture_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:burden_pasture&outputFormat=text/javascript&format_options=callback:getJson";
+    $.ajax({
+        jsonp: false,
+        jsonpCallback: 'getJson',
+        type: 'GET',
+        url: url_burden_pasture_v,
+        async: false,
+        dataType: 'jsonp',
+        success: function (data_burden_pasture_v) {
+            Layer_burden_pasture_v = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_burden_pasture_v, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                })
+            });
+            // векторный слой областей
+            var url_adm1pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm1pol&outputFormat=text/javascript&format_options=callback:getJson";
+            $.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_adm1pol_v,
+                async: false,
+                dataType: 'jsonp',
+                success: function (data_adm1pol_v) {
+                    Layer_adm1pol_v = new ol.layer.Vector({
+                        source: new ol.source.Vector({
+                            features: (new ol.format.GeoJSON()).readFeatures(data_adm1pol_v, {
+                                featureProjection: 'EPSG:3857'
+                            })
+                        })
+                    });
+                    // векторный слой районов
+                    var url_adm2pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm2pol&outputFormat=text/javascript&format_options=callback:getJson";
+                    $.ajax({
+                        jsonp: false,
+                        jsonpCallback: 'getJson',
+                        type: 'GET',
+                        url: url_adm2pol_v,
+                        async: false,
+                        dataType: 'jsonp',
+                        success: function (data_adm2pol_v) {
+                            Layer_adm2pol_v = new ol.layer.Vector({
+                                source: new ol.source.Vector({
+                                    features: (new ol.format.GeoJSON()).readFeatures(data_adm2pol_v, {
+                                        featureProjection: 'EPSG:3857'
+                                    })
+                                })
+                            });
+                            // векторный слой сельских округов
+                            var url_adm3pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm3pol&outputFormat=text/javascript&format_options=callback:getJson";
+                            $.ajax({
+                                jsonp: false,
+                                jsonpCallback: 'getJson',
+                                type: 'GET',
+                                url: url_adm3pol_v,
+                                async: false,
+                                dataType: 'jsonp',
+                                success: function (data_adm3pol_v) {
+                                    Layer_adm3pol_v = new ol.layer.Vector({
+                                        source: new ol.source.Vector({
+                                            features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
+                                                featureProjection: 'EPSG:3857'
+                                            })
+                                        })
+                                    });
+                                    $("#maindiv").LoadingOverlay("hide");
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    // правая панель
+    window.app = {};
+    var app = window.app;
+    app.ShowHideSidePanel = function (opt_options) {
+        var options = opt_options || {};
+        var button = document.createElement('button');
+        button.id = "sidepanelshowhide";
+        button.innerHTML = '«';
+        var this_ = this;
+        var handleShowHideSidePanel = function () {
+            if (document.getElementById("sidepanel").offsetWidth == 0) {
+                document.getElementById('sidepanel').setAttribute("style", "width:350px");
+                document.getElementById('sidepanel').setAttribute("style", "display:block");
+                button.innerHTML = '»';
+                map.updateSize();
+            }
+            else {
+                document.getElementById('sidepanel').setAttribute("style", "width:0px");
+                document.getElementById('sidepanel').setAttribute("style", "display:none");
+                button.innerHTML = '«';
+                map.updateSize();
+            }
+        };
+        button.addEventListener('click', handleShowHideSidePanel, false);
+        var element = document.createElement('div');
+        element.className = 'sidepanel-hide ol-unselectable ol-control';
+        element.appendChild(button);
+        ol.control.Control.call(this, {
+            element: element,
+            target: options.target
+        });
+    }
+    ol.inherits(app.ShowHideSidePanel, ol.control.Control);
+    function ShowSidePanel() {
+        if (document.getElementById("sidepanel").offsetWidth == 0) {
+            document.getElementById('sidepanel').setAttribute("style", "width:350px");
+            document.getElementById('sidepanel').setAttribute("style", "display:block");
+            document.getElementById('sidepanelshowhide').innerHTML = '»';
+            map.updateSize();
+        }
+        else {
+            document.getElementById('sidepanel').setAttribute("style", "width:0px");
+            document.getElementById('sidepanel').setAttribute("style", "display:none");
+            document.getElementById('sidepanelshowhide').innerHTML = '«';
+            map.updateSize();
+        }
+        map.updateSize();
+    };
+
+    // элемент карты - информация
+    var attribution = new ol.control.Attribution({
+        label: 'i',
+        collapsed: true,
+        tipLabel: ''
+    });
+
+    // элемент zoom
+    var zoom = new ol.control.Zoom({
+        zoomInTipLabel: '',
+        zoomOutTipLabel: ''
+    });
+
+    // вид
+    var view = new ol.View({
+        projection: 'EPSG:3857',
+        center: [7447522, 6202316],
+        zoom: 5
+    });
+
+    // карта
+    var map = new ol.Map({
+        controls: ol.control.defaults({
+            attribution: false,
+            zoom: false
+        }).extend([
+            new ol.control.ScaleLine({ units: 'metric' }),
+            new app.ShowHideSidePanel(),
+            attribution,
+            zoom
+        ]),
+        layers: [
+            Layer_Base,                 // 0
+            Layer_burden_pasture,       // 1
+            Layer_found_burden_pasture, // 2
+            Layer_select_burden_pasture,// 3
+            Layer_hdrlin,               // 5
+            Layer_rdslin,               // 6
+            Layer_adm123pol,            // 7
+            Layer_select_cato,          // 8
+            Layer_poppol,               // 9
+            Layer_poppnt,                // 10
+            Layer_hdrpol               // 4
+        ],
+        target: 'map',
+        view: view
+    });
+
+    // permalink
+    var minzoom;
+    if (window.location.hash !== '') {
+        var hash = window.location.hash.replace('#map=', '');
+        var parts = hash.split('/');
+        if (parts.length === 4) {
+            var zoom = parseInt(parts[0], 10);
+            var center = [
+              parseFloat(parts[1]),
+              parseFloat(parts[2])
+            ];
+            view = new ol.View({
+                projection: 'EPSG:3857',
+                center: center,
+                zoom: zoom
+            });
+            map.setView(view);
+
+            rotation = parseFloat(parts[3]);
+        }
+    }
+    var shouldUpdate = true;
+    window.addEventListener('popstate', function (event) {
+        if (event.state === null) {
+            return;
+        }
+        map.getView().setCenter(event.state.center);
+        map.getView().setZoom(event.state.zoom);
+        map.getView().setRotation(event.state.rotation);
+        shouldUpdate = false;
+    });
+
+    // ограничение карты, permalink
+    var ex = map.getView().calculateExtent(map.getSize());
+    function onMoveEnd(evt) {
+        // permalink
+        if (!shouldUpdate) {
+            shouldUpdate = true;
+            return;
+        }
+        var center = view.getCenter();
+        var hash = '#map=' +
+            view.getZoom() + '/' +
+            Math.round(center[0] * 100) / 100 + '/' +
+            Math.round(center[1] * 100) / 100 + '/' +
+            view.getRotation();
+        var state = {
+            zoom: view.getZoom(),
+            center: view.getCenter(),
+            rotation: view.getRotation()
+        };
+        window.history.pushState(state, 'map', hash);
+
+        if ($('#visible8').is(":checked")) {
+            if (map.getView().getZoom() < 10) {
+                Layer_poppnt.setVisible(false);
+            }
+            else {
+                Layer_poppnt.setVisible(true);
+            }
+        }
+        if ($('#visible10').is(":checked")) {
+            if (map.getView().getZoom() < 8) {
+                Layer_hdrlin.setVisible(false);
+            }
+            else {
+                Layer_hdrlin.setVisible(true);
+            }
+        }
+
+        //var map = evt.map;
+        //var extent = map.getView().calculateExtent(map.getSize());
+        //var bottomLeft = ol.extent.getBottomLeft(extent);
+        //var topRight = ol.extent.getTopRight(extent);
+        //var exRight = ol.extent.getTopRight(ex)[0];
+        //var exLeft = ol.extent.getBottomLeft(ex)[0];
+        //var exTop = ol.extent.getTopRight(ex)[1];
+        //var exBottom = ol.extent.getBottomLeft(ex)[1];
+        //// границы
+        //// северо-восток
+        //if (topRight[0] > exRight && topRight[1] > exTop) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
+        //            map.getView().getCenter()[1] - topRight[1] + exTop]);
+        //}
+        //    // юго-восток
+        //else if (bottomLeft[1] < exBottom && topRight[0] > exRight) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
+        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
+        //           );
+        //}
+        //    // юго-запад
+        //else if (bottomLeft[0] < exLeft && bottomLeft[1] < exBottom) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
+        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
+        //           );
+        //}
+        //    // северо-запад
+        //else if (topRight[1] > exTop && bottomLeft[0] < exLeft) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
+        //            map.getView().getCenter()[1] - topRight[1] + exTop]
+        //           );
+        //}
+        //    // восток
+        //else if (topRight[0] > exRight) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
+        //            map.getView().getCenter()[1]]
+        //           );
+        //}
+        //    // юг
+        //else if (bottomLeft[1] < exBottom) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0],
+        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
+        //           );
+        //}
+        //    // запад
+        //else if (bottomLeft[0] < exLeft) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
+        //            map.getView().getCenter()[1]]
+        //           );
+        //}
+        //    // север
+        //else if (topRight[1] > exTop) {
+        //    var pan = ol.animation.pan({
+        //        source: map.getView().getCenter()
+        //    });
+        //    map.beforeRender(pan);
+        //    map.getView().setCenter(
+        //            [map.getView().getCenter()[0],
+        //            map.getView().getCenter()[1] - topRight[1] + exTop]
+        //           );
+        //}
+    }
+    map.on('moveend', onMoveEnd);
+
+    // функция нажатия на карту
+    map.on('singleclick', function (evt) {
+
+        Source_select_burden_pasture.clear();
+
+        document.getElementById("info_num_vydel").innerHTML = "";
+        //document.getElementById("info_rule_grazi").innerHTML = "";
+        document.getElementById("info_bur_otdel").innerHTML = "";
+        document.getElementById("info_bur_type_i").innerHTML = "";
+        document.getElementById("info_bur_subotd").innerHTML = "";
+        document.getElementById("info_bur_class_").innerHTML = "";
+        document.getElementById("info_bur_group_").innerHTML = "";
+        //document.getElementById("info_average_yi").innerHTML = "";
+        document.getElementById("info_burden_gro").innerHTML = "";
+        document.getElementById("info_burden_deg").innerHTML = "";
+
+        var viewResolution = (view.getResolution());
+
+        var url_burden_pasture = Source_burden_pasture.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {
+                'INFO_FORMAT': 'text/javascript',
+                'propertyName': 'objectid,geom'
+            });
+        if (url_burden_pasture) {
+            // данные со слоев
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_burden_pasture + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+
+                // если слой пастбищ включен
+                if (Layer_burden_pasture.getVisible()) {
+                    // работа с пастбищем в виде вектора (выделение пастбища)
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_burden_pasture.addFeature(polyFeature);
+
+                    // получение информации о пастбище
+                    $.ajax({
+                        url: '@Url.Action("GetPastureBurdenInfo")',
+                        data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            document.getElementById("info_num_vydel").innerHTML = data.num_vydel;
+                            //document.getElementById("info_rule_grazi").innerHTML = data.rule_grazi;
+                            document.getElementById("info_bur_otdel").innerHTML = data.bur_otdel;
+                            document.getElementById("info_bur_type_i").innerHTML = data.bur_type_i;
+                            document.getElementById("info_bur_subotd").innerHTML = data.bur_subotd;
+                            document.getElementById("info_bur_class_").innerHTML = data.bur_class_;
+                            document.getElementById("info_bur_group_").innerHTML = data.bur_group_;
+                            //document.getElementById("info_average_yi").innerHTML = data.average_yi;
+                            document.getElementById("info_burden_gro").innerHTML = data.burden_gro;
+                            document.getElementById("info_burden_deg").innerHTML = data.burden_deg;
+                        },
+                        error: function () {
+                        }
+                    });
+                    // отображение информации о пастбище
+                    if (dialog_info_burden_pasture_first) {
+                        dialog_info_burden_pasture_first = false;
+                        $("#dialog_info_pasture").dialog({
+                            width: 500,
+                            height: 500,
+                        });
+                    }
+                    else {
+                        $("#dialog_info_pasture").dialog({});
+                    }
+                }
+            });
+        }
+    });
+
+    // смена базового слоя
+    function ChangeMapSource(val) {
+        if (val == 'OpenStreetMap') {
+            var Source = new ol.source.OSM({});
+            Layer_Base.setSource(Source);
+        }
+        if (val == 'OpenCycleMap') {
+            var Source = new ol.source.OSM({
+                url: 'http://{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
+            });
+            Layer_Base.setSource(Source);
+        }
+        if (val == 'ArcGIS') {
+            var attribution = new ol.Attribution({
+                html: 'Tiles © <a href="http://services.arcgisonline.com/ArcGIS/' +
+                    'rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
+            });
+            var Source = new ol.source.XYZ({
+                attributions: [attribution],
+                url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
+                    'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+            });
+            Layer_Base.setSource(Source);
+        }
+        if (val == 'Bing') {
+            var Source = new ol.source.BingMaps({
+                key: 'AjVI_sNKERaeUVpMkNw8Xci1a-5HlLKZAVHayk_jg9dutb1dM5NCeA_d7bzT_0Rp',
+                imagerySet: 'Road'
+            });
+            Layer_Base.setSource(Source);
+        }
+        if (val == 'BingAerial') {
+            var Source = new ol.source.BingMaps({
+                key: 'AjVI_sNKERaeUVpMkNw8Xci1a-5HlLKZAVHayk_jg9dutb1dM5NCeA_d7bzT_0Rp',
+                imagerySet: 'AerialWithLabels'
+            });
+            Layer_Base.setSource(Source);
+        }
+    };
+
+    // домой
+    function ToHome() {
+        map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
+        $("#MapSources").val("OpenStreetMap");
+        var Source = new ol.source.OSM({});
+        Layer_Base.setSource(Source);
+        Source_select_burden_pasture.clear();
+        Source_found_burden_pasture.clear();
+        Source_select_cato.clear();
+        $("#catoobl").val('');
+        $("#catoray").val('');
+        $("#catoray").empty();
+        $("#catosok").val('');
+        $("#catosok").empty();
+    };
+
+    // отображать, скрывать слои; настраивать их прозрачность
+    function bindInputs(layerid, layer) {
+        var visibilityInput = $(layerid + ' input.visible');
+        visibilityInput.on('change', function () {
+            layer.setVisible(this.checked);
+            if (layerid == '#layer1') {
+                Layer_select_burden_pasture.setVisible(this.checked);
+                Layer_found_burden_pasture.setVisible(this.checked);
+            }
+            if (layerid == '#layer10') {
+                Layer_hdrlin.setVisible(this.checked);
+                if (map.getView().getZoom() < 8) {
+                    Layer_hdrlin.setVisible(false);
+                }
+            }
+            if (layerid == '#layer6') {
+                Layer_select_cato.setVisible(this.checked);
+            }
+            if (layerid == '#layer8') {
+                Layer_poppnt.setVisible(this.checked);
+                if (map.getView().getZoom() < 10) {
+                    Layer_poppnt.setVisible(false);
+                }
+            }
+        });
+        visibilityInput.prop('checked', layer.getVisible());
+        var opacityInput = $(layerid + ' input.opacity');
+        opacityInput.on('input change', function () {
+            layer.setOpacity(parseFloat(this.value / 100));
+            if (layerid == '#layer1') {
+                Layer_select_burden_pasture.setOpacity(parseFloat(this.value / 100));
+                Layer_found_burden_pasture.setOpacity(parseFloat(this.value / 100));
+            }
+            if (layerid == '#layer10') {
+                Layer_hdrlin.setOpacity(parseFloat(this.value / 100));
+            }
+            if (layerid == '#layer6') {
+                Layer_select_cato.setOpacity(parseFloat(this.value / 100));
+            }
+            if (layerid == '#layer8') {
+                Layer_poppnt.setOpacity(parseFloat(this.value / 100));
+            }
+        });
+        opacityInput.val(String(layer.getOpacity() * 100));
+        if (map.getView().getZoom() < 10) {
+            Layer_poppnt.setVisible(false);
+        }
+        if (map.getView().getZoom() < 8) {
+            Layer_hdrlin.setVisible(false);
+        }
+    };
+    map.getLayers().forEach(function (layer, i) {
+        bindInputs('#layer' + i, layer);
+    });
+    $('#layertree li > span').click(function () {
+        $(this).siblings('fieldset').toggle();
+    }).siblings('fieldset').hide();
+    $('#title_layers').click(function () {
+        $('#layertree').toggle();
+    })
+
+    // окно поиска пастбищ
+    function ShowFind() {
+        Source_found_burden_pasture.clear();
+        if (dialog_find_burden_pasture_first) {
+            dialog_find_burden_pasture_first = false;
+            $("#dialog_find_pasture").dialog({
+                width: 500,
+                height: 550,
+            });
+        }
+        else {
+            $("#dialog_find_pasture").dialog({});
+        }
+    };
+
+    // поиск пастбищ
+    function Find() {
+        Source_found_burden_pasture.clear();
+        var count = 0;
+        for (i = 0; i < Layer_burden_pasture_v.getSource().getFeatures().length; i++) {
+            var feature = Layer_burden_pasture_v.getSource().getFeatures()[i];
+            if ((feature.getProperties().num_vydel != document.getElementById("find_num_vydel").value) && (document.getElementById("find_num_vydel").value != '')) {
+                continue;
+            }
+            //if ((feature.getProperties().rule_grazi != document.getElementById("find_rule_grazi").value) && (document.getElementById("find_rule_grazi").value != '')) {
+            //    continue;
+            //}
+            if ((document.getElementById("find_BurOtdel").options[document.getElementById("find_BurOtdel").selectedIndex].value != '') && (feature.getProperties().bur_otdel != document.getElementById("find_BurOtdel").options[document.getElementById("find_BurOtdel").selectedIndex].value)) {
+                continue;
+            }
+            if ((document.getElementById("find_BType").options[document.getElementById("find_BType").selectedIndex].value != '') && (feature.getProperties().bur_type_i != document.getElementById("find_BType").options[document.getElementById("find_BType").selectedIndex].value)) {
+                continue;
+            }
+            if ((document.getElementById("find_BurSubOtdel").options[document.getElementById("find_BurSubOtdel").selectedIndex].value != '') && (feature.getProperties().bur_subotd != document.getElementById("find_BurSubOtdel").options[document.getElementById("find_BurSubOtdel").selectedIndex].value)) {
+                continue;
+            }
+            if ((document.getElementById("find_BClass").options[document.getElementById("find_BClass").selectedIndex].value != '') && (feature.getProperties().bur_class_ != document.getElementById("find_BClass").options[document.getElementById("find_BClass").selectedIndex].value)) {
+                continue;
+            }
+            if ((document.getElementById("find_BGroup").options[document.getElementById("find_BGroup").selectedIndex].value != '') && (feature.getProperties().bur_group_ != document.getElementById("find_BGroup").options[document.getElementById("find_BGroup").selectedIndex].value)) {
+                continue;
+            }
+            //if ((document.getElementById("find_average_yi_1").value != '') && (parseFloat(feature.getProperties().average_yi) < parseFloat(document.getElementById("find_average_yi_1").value))) {
+            //    continue;
+            //}
+            //if ((document.getElementById("find_average_yi_2").value != '') && (parseFloat(feature.getProperties().average_yi) > parseFloat(document.getElementById("find_average_yi_2").value))) {
+            //    continue;
+            //}
+            if ((document.getElementById("find_burden_gro_1").value != '') && (parseFloat(feature.getProperties().burden_gro) < parseFloat(document.getElementById("find_burden_gro_1").value))) {
+                continue;
+            }
+            if ((document.getElementById("find_burden_gro_2").value != '') && (parseFloat(feature.getProperties().burden_gro) > parseFloat(document.getElementById("find_burden_gro_2").value))) {
+                continue;
+            }
+            if ((document.getElementById("find_burden_deg_1").value != '') && (parseFloat(feature.getProperties().burden_deg) < parseFloat(document.getElementById("find_burden_deg_1").value))) {
+                continue;
+            }
+            if ((document.getElementById("find_burden_deg_2").value != '') && (parseFloat(feature.getProperties().burden_deg) > parseFloat(document.getElementById("find_burden_deg_2").value))) {
+                continue;
+            }
+            Source_found_burden_pasture.addFeature(feature);
+            count++;
+        }
+        //alert(count);
+    };
+
+    // маска поиска пастбищ
+    var im = new Inputmask("9-9");
+    //im.mask(document.getElementById("find_average_yi_1"));
+    //Inputmask({ "mask": "9,9" }).mask(document.getElementById("find_average_yi_1"));
+    //$('#find_average_yi_1').inputmask({ "placeholder": "0" });
+    //im.mask(document.getElementById("find_average_yi_2"));
+    //Inputmask({ "mask": "9,9" }).mask(document.getElementById("find_average_yi_2"));
+    //$('#find_average_yi_2').inputmask({ "placeholder": "0" });
+    im = new Inputmask("999");
+    im.mask(document.getElementById("find_burden_gro_1"));
+    Inputmask({ "mask": "999" }).mask(document.getElementById("find_burden_gro_1"));
+    $('#find_burden_gro_1').inputmask({ "placeholder": "0" });
+    im.mask(document.getElementById("find_burden_gro_2"));
+    Inputmask({ "mask": "999" }).mask(document.getElementById("find_burden_gro_2"));
+    $('#find_burden_gro_2').inputmask({ "placeholder": "0" });
+    im.mask(document.getElementById("find_burden_deg_1"));
+    Inputmask({ "mask": "999" }).mask(document.getElementById("find_burden_deg_1"));
+    $('#find_burden_deg_1').inputmask({ "placeholder": "0" });
+    im.mask(document.getElementById("find_burden_deg_2"));
+    Inputmask({ "mask": "999" }).mask(document.getElementById("find_burden_deg_2"));
+    $('#find_burden_deg_2').inputmask({ "placeholder": "0" });
+
+    // окно поиска КАТО
+    function ShowFindKATO() {
+        if (dialog_find_kato_first) {
+            dialog_find_kato_first = false;
+            $("#dialog_find_kato").dialog({
+                width: 350,
+                height: 200,
+            });
+        }
+        else {
+            $("#dialog_find_kato").dialog({});
+        }
+    };
+
+    // поиск области
+    $("#catoobl").change(function () {
+        if (document.getElementById("catoobl").options[document.getElementById("catoobl").selectedIndex].value == '') {
+            $("#catoray").empty();
+            $("#catosok").empty();
+            Source_select_cato.clear();
+        }
+        else {
+            $("#catosok").empty();
+            for (var f = 0; f < Layer_adm1pol_v.getSource().getFeatures().length; f++) {
+                if (Layer_adm1pol_v.getSource().getFeatures()[f].get('kato_te') == document.getElementById("catoobl").options[document.getElementById("catoobl").selectedIndex].value) {
+                    // копирование области в векторный слой для поиска КАТО
+                    Source_select_cato.clear();
+                    var polyFeature = new ol.Feature({
+                        geometry: Layer_adm1pol_v.getSource().getFeatures()[f].getGeometry()
+                    });
+                    Source_select_cato.addFeature(polyFeature);
+                    // формирование списка районов
+                    $.ajax({
+                        url: '@Url.Action("GetCATORayons")',
+                        data: JSON.stringify({ "oblcatote": Layer_adm1pol_v.getSource().getFeatures()[f].get('kato_te') }),
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            $("#catoray").empty();
+                            $.each(data, function (i, d) {
+                                $('#catoray').append($('<option></option>').val(d.TE).html(d.Name));
+                            });
+                        },
+                        error: function () {
+                        }
+                    });
+                    var extent = Layer_adm1pol_v.getSource().getFeatures()[f].getGeometry().getExtent();
+                    map.getView().fit(extent, map.getSize());
+                    break;
+                }
+            }
+        }
+    });
+
+    // поиск района
+    $("#catoray").change(function () {
+        if (document.getElementById("catoray").options[document.getElementById("catoray").selectedIndex].value == '') {
+            $("#catosok").empty();
+            Source_select_cato.clear();
+        }
+        else {
+            for (var f = 0; f < Layer_adm2pol_v.getSource().getFeatures().length; f++) {
+                if (Layer_adm2pol_v.getSource().getFeatures()[f].get('kato') == document.getElementById("catoray").options[document.getElementById("catoray").selectedIndex].value) {
+                    // копирование района в векторный слой для поиска КАТО
+                    Source_select_cato.clear();
+                    var polyFeature = new ol.Feature({
+                        geometry: Layer_adm2pol_v.getSource().getFeatures()[f].getGeometry()
+                    });
+                    Source_select_cato.addFeature(polyFeature);
+                    // формирование списка сельских округов
+                    $.ajax({
+                        url: '@Url.Action("GetCATOSOkrugs")',
+                        data: JSON.stringify({ "raycatote": Layer_adm2pol_v.getSource().getFeatures()[f].get('kato') }),
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            $("#catosok").empty();
+                            $.each(data, function (i, d) {
+                                $('#catosok').append($('<option></option>').val(d.TE).html(d.Name));
+                            });
+                        },
+                        error: function () {
+                        }
+                    });
+                    var extent = Layer_adm2pol_v.getSource().getFeatures()[f].getGeometry().getExtent();
+                    map.getView().fit(extent, map.getSize());
+                    break;
+                }
+            }
+        }
+    });
+
+    // поиск сельского округа
+    $("#catosok").change(function () {
+        if (document.getElementById("catosok").options[document.getElementById("catosok").selectedIndex].value == '') {
+            $("#catosok").empty();
+            Source_select_cato.clear();
+        }
+        else {
+            for (var f = 0; f < Layer_adm3pol_v.getSource().getFeatures().length; f++) {
+                if (Layer_adm3pol_v.getSource().getFeatures()[f].get('kato_te') == document.getElementById("catosok").options[document.getElementById("catosok").selectedIndex].value) {
+                    // копирование сельского округа в векторный слой для поиска КАТО
+                    Source_select_cato.clear();
+                    var polyFeature = new ol.Feature({
+                        geometry: Layer_adm3pol_v.getSource().getFeatures()[f].getGeometry()
+                    });
+                    Source_select_cato.addFeature(polyFeature);
+                    var extent = Layer_adm3pol_v.getSource().getFeatures()[f].getGeometry().getExtent();
+                    map.getView().fit(extent, map.getSize());
+                    break;
+                }
+            }
+        }
+    });
+
+    // окно легенды
+    function Legend() {
+        if (dialog_legend_first) {
+            dialog_legend_first = false;
+            $("#dialog_legend").dialog({
+                width: 580,
+                height: 500,
+            });
+        }
+        else {
+            $("#dialog_legend").dialog({});
+        }
+    };
+
+    $(document).ready(function (e) {
+        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
+        });
+
+        $("#MapSources").val("OpenStreetMap");
+
+        // высота карты
+        $("#mapsidepanel").height($(window).height() - 220);
+        if ($("#mapsidepanel").height() < 440) {
+            $("#mapsidepanel").height(440);
+        }
+
+        // скрыть правую панель
+        document.getElementById('sidepanel').setAttribute("style", "width:0px");
+        document.getElementById('sidepanel').setAttribute("style", "display:none");
+
+        //домой
+        map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
+        map.updateSize();
+        map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
+
+        ex = map.getView().calculateExtent(map.getSize());
+
+        minzoom = map.getView().getZoom()
+
+        view = new ol.View({
+            projection: 'EPSG:3857',
+            center: [7447522, 6202316],
+            zoom: map.getView().getZoom(),
+            minZoom: minzoom
+        });
+        map.setView(view);
+
+        // permalink
+        var hash = window.location.hash.replace('#map=', '');
+        var parts = hash.split('/');
+        if (parts.length === 4) {
+            var zoom = parseInt(parts[0], 10);
+            var center = [
+              parseFloat(parts[1]),
+              parseFloat(parts[2])
+            ];
+            view = new ol.View({
+                projection: 'EPSG:3857',
+                center: center,
+                zoom: zoom,
+                minZoom: minzoom
+            });
+            map.setView(view);
+        }
+
+        Layer_adm123pol.setVisible(false);
+        $('#visible6').attr('checked', false);
+    });
+
+    window.addEventListener('resize', function (event) {
+        // высота карты
+        $("#mapsidepanel").height($(window).height() - 220);
+        if ($("#mapsidepanel").height() < 440) {
+            $("#mapsidepanel").height(440);
+        }
+
+        // скрыть правую панель
+        document.getElementById('sidepanel').setAttribute("style", "width:0px");
+        document.getElementById('sidepanel').setAttribute("style", "display:none");
+        var button = document.getElementById('sidepanelshowhide');
+        button.innerHTML = '«';
+
+        //домой
+        map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
+        map.updateSize();
+        map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
+
+        ex = map.getView().calculateExtent(map.getSize());
+
+        view = new ol.View({
+            projection: 'EPSG:3857',
+            center: [7447522, 6202316],
+            zoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom(),
+            minZoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom()
+        });
+        map.setView(view);
+
+        // permalink
+        var hash = window.location.hash.replace('#map=', '');
+        var parts = hash.split('/');
+        if (parts.length === 4) {
+            var zoom = parseInt(parts[0], 10);
+            var center = [
+                parseFloat(parts[1]),
+                parseFloat(parts[2])
+            ];
+            view = new ol.View({
+                projection: 'EPSG:3857',
+                center: center,
+                zoom: zoom,
+                minZoom: minzoom
+            });
+            map.setView(view);
+        }
+    });
+</script>

@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+
+    <h2>Администрирование</h2>
+    <h3>Модуль «Администрирование»</h3>
+    <dl class="admlist">
+        <dt>Управление ролями пользователей и назначение роли пользователя в приложении</dt>
+        <dd>@Html.ActionLink("Редактировать", "Users", "Admin", null, new { @class = "btn btn-default" })</dd>
+    </dl>
+    <h3>Кормовые ресурсы Республики Казахстан</h3>
+    <dl class="admlist">     
+
+        <dt>Функция предназначена для регистрации "КАТО"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "CATOes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Типы пастбищ"</dt>
+        <dd> @Html.ActionLink("Редактировать", "Index", "PTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Рельефы"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Reliefs", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Зоны"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Zones", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Подтипы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "PSubTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Группы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Soobs", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Рекомендации по сезонам"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Recommends", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Рекомендации по виду скота"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "RecomCattles", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Сенокосы"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Hayings", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Отделы"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Otdels", null, new { @class = "btn btn-default" })</dd>
+    </dl>
+
+    <h3>Земельный запас Республики Казахстан</h3>
+    <dl class="admlist">
+
+        <dt>Функция предназначена для ведения справочника "Земельный фонд по категориям земель"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "STypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Типы доминирующих пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "DominantTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Подкатегории земель"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "ZSubTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Рекомендации по сезонам"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "SupplyRecommends", null, new { @class = "btn btn-default" })</dd>
+    </dl>
+
+
+    <h3>Породное районирование сельскохозяйственных животных Республики Казахстан</h3>
+    <dl class="admlist">
+        <dt>Функция предназначена для ведения справочника "Типы использования земель (породное районирование)"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "ZTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Верблюды"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Camels", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "КРС"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Cattle", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Лошади"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "Horses", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "МРС"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "SmallCattles", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Породы по КАТО"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "CATOSpecies", null, new { @class = "btn btn-default" })</dd>
+    </dl>
+
+    <h3>Обводнение пастбищ Республики Казахстан</h3>
+    <dl class="admlist">
+        <dt>Функция предназначена для ведения справочника "Типы водоисточников"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "WTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Типы водопроявления"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "WSubTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Химические составы воды"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "ChemicalComps", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Классы водоисточников"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "WClasses", null, new { @class = "btn btn-default" })</dd>
+    </dl>
+    <h3>Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан</h3>
+    <dl class="admlist">
+        <dt>Функция предназначена для ведения справочника "Отделы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "BurOtdels", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Типы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "BTypes", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Подотделы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "BurSubOtdels", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Классы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "BClasses", null, new { @class = "btn btn-default" })</dd>
+
+        <dt>Функция предназначена для ведения справочника "Группы пастбищ"</dt>
+        <dd>@Html.ActionLink("Редактировать", "Index", "BGroups", null, new { @class = "btn btn-default" })</dd>
+
+    </dl>
+
+</div>
