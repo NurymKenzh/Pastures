@@ -12,7 +12,7 @@ namespace Pastures.Controllers
     {
         private NpgsqlContext db = new NpgsqlContext();
 
-        //const string www = "pastures.info.tm";
+        const string geoserverURL = "http://92.46.36.100:8080/geoserver/";
 
         struct PieData
         {
@@ -69,7 +69,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            //ViewBag.WWW = Properties.Settings.Default.www;
+            ViewBag.geoserverURL = geoserverURL;
 
             return View();
         }
@@ -100,7 +100,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            //ViewBag.WWW = Properties.Settings.Default.www;
+            ViewBag.geoserverURL = geoserverURL;
 
             return View();
         }
@@ -126,7 +126,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            //ViewBag.WWW = Properties.Settings.Default.www;
+            ViewBag.geoserverURL = geoserverURL;
 
             return View();
         }
@@ -158,7 +158,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            //ViewBag.WWW = Properties.Settings.Default.www;
+            ViewBag.geoserverURL = geoserverURL;
 
             return View();
         }
@@ -188,7 +188,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            //ViewBag.WWW = Properties.Settings.Default.www;
+            ViewBag.geoserverURL = geoserverURL;
 
             return View();
         }
