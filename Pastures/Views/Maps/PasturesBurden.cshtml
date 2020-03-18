@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Нагрузка сельскохозяйственных животных на пастбища";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -114,13 +113,6 @@
                                 Базовые слои
                             </u>
                         </span>
-                        @*<fieldset id="layer0">
-                                <label class="checkbox" for="visible0">
-                                    <input id="visible0" class="visible" type="checkbox" />Отображать
-                                </label>
-                                <label>Прозрачность</label>
-                                <input class="opacity" type="range" min="0" max="100" step="1" />
-                            </fieldset>*@
                         <ul>
                             <li>
                                 <span>
@@ -236,12 +228,6 @@
             </td>
             <td id="info_num_vydel" style="padding-left: 10px;"></td>
         </tr>
-        @*<tr>
-                <td>
-                    Нормы нагрузки
-                </td>
-                <td id="info_rule_grazi" style="padding-left: 10px;"></td>
-            </tr>*@
         <tr>
             <td>
                 Отдел пастбищ
@@ -272,12 +258,6 @@
             </td>
             <td id="info_bur_group_" style="padding-left: 10px;"></td>
         </tr>
-        @*<tr>
-            <td>
-                Средняя урожайность, ц/га
-            </td>
-            <td id="info_average_yi" style="padding-left: 10px;"></td>
-        </tr>*@
         <tr>
             <td>
                 Норма пастбищной нагрузки на фоновые пастбища, усл. гол. / 100 га
@@ -304,14 +284,6 @@
                 <input type="text" id="find_num_vydel" class="form-control" style="display: inline;" />
             </td>
         </tr>
-        @*<tr>
-                <td>
-                    Нормы нагрузки
-                </td>
-                <td style="padding-left: 10px;">
-                    <input type="text" id="find_rule_grazi" class="form-control" style="display: inline;" />
-                </td>
-            </tr>*@
         <tr>
             <td>
                 Отдел пастбищ
@@ -352,14 +324,6 @@
                 @Html.DropDownList("BGroup", (IEnumerable<SelectListItem>)ViewBag.BGroups, "", htmlAttributes: new { @class = "form-control", @id = "find_BGroup" })
             </td>
         </tr>
-        @*<tr>
-            <td>
-                Средняя урожайность, ц/га
-            </td>
-            <td style="padding-left: 10px;">
-                <input type="text" id="find_average_yi_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_average_yi_2" class="form-control" style="width: 70px; display: inline;" />
-            </td>
-        </tr>*@
         <tr>
             <td>
                 Норма пастбищной нагрузки на фоновые пастбища, усл. гол. / 100 га
@@ -407,10 +371,6 @@
     <img src="~/Images/Maps/burden_pasture2018.png" style="width:550px;" />
 </div>
 
-<div hidden="hidden">
-    @*<input id="WWW" value="@ViewBag.WWW" />*@
-</div>
-
 <script>
     $("#maindiv").LoadingOverlay("show");
 
@@ -425,22 +385,6 @@
     var Layer_Base = new ol.layer.Tile({
         source: new ol.source.OSM()
     });
-
-    //// источник данных и слой дорог, населенных пунктов, водоемов
-    //var Source_base2 = new ol.source.ImageWMS({
-    //    url: WWW + 'Pastures/wms?',
-    //    params: {
-    //        'LAYERS': 'Pastures:base2',
-    //        'VERSION': '1.1.0',
-    //        'FORMAT': 'image/png',
-    //        //'TILED': true
-    //    },
-    //    serverType: 'geoserver'
-    //});
-    //var Layer_base2 =
-    //    new ol.layer.Image({
-    //        source: Source_base2
-    //    });
 
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
@@ -559,8 +503,7 @@
         params: {
             'LAYERS': 'Pastures:burden_pasture',
             'VERSION': '1.1.0',
-            'FORMAT': 'image/png',
-            //'TILED': true
+            'FORMAT': 'image/png'
         },
         serverType: 'geoserver'
     });
@@ -775,8 +718,8 @@
             Layer_adm123pol,            // 7
             Layer_select_cato,          // 8
             Layer_poppol,               // 9
-            Layer_poppnt,                // 10
-            Layer_hdrpol               // 4
+            Layer_poppnt,               // 10
+            Layer_hdrpol                // 4
         ],
         target: 'map',
         view: view
@@ -851,103 +794,6 @@
                 Layer_hdrlin.setVisible(true);
             }
         }
-
-        //var map = evt.map;
-        //var extent = map.getView().calculateExtent(map.getSize());
-        //var bottomLeft = ol.extent.getBottomLeft(extent);
-        //var topRight = ol.extent.getTopRight(extent);
-        //var exRight = ol.extent.getTopRight(ex)[0];
-        //var exLeft = ol.extent.getBottomLeft(ex)[0];
-        //var exTop = ol.extent.getTopRight(ex)[1];
-        //var exBottom = ol.extent.getBottomLeft(ex)[1];
-        //// границы
-        //// северо-восток
-        //if (topRight[0] > exRight && topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]);
-        //}
-        //    // юго-восток
-        //else if (bottomLeft[1] < exBottom && topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // юго-запад
-        //else if (bottomLeft[0] < exLeft && bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // северо-запад
-        //else if (topRight[1] > exTop && bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
-        //    // восток
-        //else if (topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // юг
-        //else if (bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // запад
-        //else if (bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // север
-        //else if (topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
     }
     map.on('moveend', onMoveEnd);
 
@@ -957,18 +803,15 @@
         Source_select_burden_pasture.clear();
 
         document.getElementById("info_num_vydel").innerHTML = "";
-        //document.getElementById("info_rule_grazi").innerHTML = "";
         document.getElementById("info_bur_otdel").innerHTML = "";
         document.getElementById("info_bur_type_i").innerHTML = "";
         document.getElementById("info_bur_subotd").innerHTML = "";
         document.getElementById("info_bur_class_").innerHTML = "";
         document.getElementById("info_bur_group_").innerHTML = "";
-        //document.getElementById("info_average_yi").innerHTML = "";
         document.getElementById("info_burden_gro").innerHTML = "";
         document.getElementById("info_burden_deg").innerHTML = "";
 
         var viewResolution = (view.getResolution());
-
         var url_burden_pasture = Source_burden_pasture.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
             {
@@ -987,46 +830,44 @@
                 error: function () {
                 }
             }).then(function (data) {
-
                 // если слой пастбищ включен
                 if (Layer_burden_pasture.getVisible()) {
-                    // работа с пастбищем в виде вектора (выделение пастбища)
-                    var polyFeature = new ol.Feature({
-                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-                    });
-                    Source_select_burden_pasture.addFeature(polyFeature);
-
-                    // получение информации о пастбище
-                    $.ajax({
-                        url: '@Url.Action("GetPastureBurdenInfo")',
-                        data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            document.getElementById("info_num_vydel").innerHTML = data.num_vydel;
-                            //document.getElementById("info_rule_grazi").innerHTML = data.rule_grazi;
-                            document.getElementById("info_bur_otdel").innerHTML = data.bur_otdel;
-                            document.getElementById("info_bur_type_i").innerHTML = data.bur_type_i;
-                            document.getElementById("info_bur_subotd").innerHTML = data.bur_subotd;
-                            document.getElementById("info_bur_class_").innerHTML = data.bur_class_;
-                            document.getElementById("info_bur_group_").innerHTML = data.bur_group_;
-                            //document.getElementById("info_average_yi").innerHTML = data.average_yi;
-                            document.getElementById("info_burden_gro").innerHTML = data.burden_gro;
-                            document.getElementById("info_burden_deg").innerHTML = data.burden_deg;
-                        },
-                        error: function () {
-                        }
-                    });
-                    // отображение информации о пастбище
-                    if (dialog_info_burden_pasture_first) {
-                        dialog_info_burden_pasture_first = false;
-                        $("#dialog_info_pasture").dialog({
-                            width: 500,
-                            height: 500,
+                    if (data.features.length > 0) {
+                        // работа с пастбищем в виде вектора (выделение пастбища)
+                        var polyFeature = new ol.Feature({
+                            geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
                         });
-                    }
-                    else {
-                        $("#dialog_info_pasture").dialog({});
+                        Source_select_burden_pasture.addFeature(polyFeature);
+                        // получение информации о пастбище
+                        $.ajax({
+                            url: '@Url.Action("GetPastureBurdenInfo")',
+                            data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                document.getElementById("info_num_vydel").innerHTML = data.num_vydel;
+                                document.getElementById("info_bur_otdel").innerHTML = data.bur_otdel;
+                                document.getElementById("info_bur_type_i").innerHTML = data.bur_type_i;
+                                document.getElementById("info_bur_subotd").innerHTML = data.bur_subotd;
+                                document.getElementById("info_bur_class_").innerHTML = data.bur_class_;
+                                document.getElementById("info_bur_group_").innerHTML = data.bur_group_;
+                                document.getElementById("info_burden_gro").innerHTML = data.burden_gro;
+                                document.getElementById("info_burden_deg").innerHTML = data.burden_deg;
+                            },
+                            error: function () {
+                            }
+                        });
+                        // отображение информации о пастбище
+                        if (dialog_info_burden_pasture_first) {
+                            dialog_info_burden_pasture_first = false;
+                            $("#dialog_info_pasture").dialog({
+                                width: 500,
+                                height: 500,
+                            });
+                        }
+                        else {
+                            $("#dialog_info_pasture").dialog({});
+                        }
                     }
                 }
             });
@@ -1168,9 +1009,6 @@
             if ((feature.getProperties().num_vydel != document.getElementById("find_num_vydel").value) && (document.getElementById("find_num_vydel").value != '')) {
                 continue;
             }
-            //if ((feature.getProperties().rule_grazi != document.getElementById("find_rule_grazi").value) && (document.getElementById("find_rule_grazi").value != '')) {
-            //    continue;
-            //}
             if ((document.getElementById("find_BurOtdel").options[document.getElementById("find_BurOtdel").selectedIndex].value != '') && (feature.getProperties().bur_otdel != document.getElementById("find_BurOtdel").options[document.getElementById("find_BurOtdel").selectedIndex].value)) {
                 continue;
             }
@@ -1186,12 +1024,6 @@
             if ((document.getElementById("find_BGroup").options[document.getElementById("find_BGroup").selectedIndex].value != '') && (feature.getProperties().bur_group_ != document.getElementById("find_BGroup").options[document.getElementById("find_BGroup").selectedIndex].value)) {
                 continue;
             }
-            //if ((document.getElementById("find_average_yi_1").value != '') && (parseFloat(feature.getProperties().average_yi) < parseFloat(document.getElementById("find_average_yi_1").value))) {
-            //    continue;
-            //}
-            //if ((document.getElementById("find_average_yi_2").value != '') && (parseFloat(feature.getProperties().average_yi) > parseFloat(document.getElementById("find_average_yi_2").value))) {
-            //    continue;
-            //}
             if ((document.getElementById("find_burden_gro_1").value != '') && (parseFloat(feature.getProperties().burden_gro) < parseFloat(document.getElementById("find_burden_gro_1").value))) {
                 continue;
             }
@@ -1211,12 +1043,6 @@
 
     // маска поиска пастбищ
     var im = new Inputmask("9-9");
-    //im.mask(document.getElementById("find_average_yi_1"));
-    //Inputmask({ "mask": "9,9" }).mask(document.getElementById("find_average_yi_1"));
-    //$('#find_average_yi_1').inputmask({ "placeholder": "0" });
-    //im.mask(document.getElementById("find_average_yi_2"));
-    //Inputmask({ "mask": "9,9" }).mask(document.getElementById("find_average_yi_2"));
-    //$('#find_average_yi_2').inputmask({ "placeholder": "0" });
     im = new Inputmask("999");
     im.mask(document.getElementById("find_burden_gro_1"));
     Inputmask({ "mask": "999" }).mask(document.getElementById("find_burden_gro_1"));
@@ -1361,9 +1187,6 @@
     };
 
     $(document).ready(function (e) {
-        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        });
-
         $("#MapSources").val("OpenStreetMap");
 
         // высота карты
@@ -1376,7 +1199,7 @@
         document.getElementById('sidepanel').setAttribute("style", "width:0px");
         document.getElementById('sidepanel').setAttribute("style", "display:none");
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1428,7 +1251,7 @@
         var button = document.getElementById('sidepanelshowhide');
         button.innerHTML = '«';
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());

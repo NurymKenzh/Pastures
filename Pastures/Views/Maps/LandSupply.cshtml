@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Земельный запас";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -119,13 +118,6 @@
                                 Базовые слои
                             </u>
                         </span>
-                        @*<fieldset id="layer0">
-                                <label class="checkbox" for="visible0">
-                                    <input id="visible0" class="visible" type="checkbox" />Отображать
-                                </label>
-                                <label>Прозрачность</label>
-                                <input class="opacity" type="range" min="0" max="100" step="1" />
-                            </fieldset>*@
                         <ul>
                             <li>
                                 <span>
@@ -241,12 +233,6 @@
             </td>
             <td id="info_type_k" style="padding-left: 10px;"></td>
         </tr>
-        @*<tr>
-                <td>
-                    Подкатегория земли
-                </td>
-                <td id="info_subtype_k" style="padding-left: 10px;"></td>
-            </tr>*@
         <tr>
             <td>
                 Тип доминирующего пастбища
@@ -265,12 +251,6 @@
             </td>
             <td id="info_korm_avgye" style="padding-left: 10px;"></td>
         </tr>
-        @*<tr>
-                <td>
-                    Площадь, га
-                </td>
-                <td id="info_area" style="padding-left: 10px;"></td>
-            </tr>*@
         <tr>
             <td>
                 Рекомендация по сезонам
@@ -291,14 +271,6 @@
                 @Html.DropDownList("SType", (IEnumerable<SelectListItem>)ViewBag.STypes, "", htmlAttributes: new { @class = "form-control", @id = "find_ZType" })
             </td>
         </tr>
-        @*<tr>
-                <td>
-                    Подкатегория земли
-                </td>
-                <td style="padding-left: 10px;">
-                    @Html.DropDownList("ZSubType", (IEnumerable<SelectListItem>)ViewBag.ZSubTypes, "", htmlAttributes: new { @class = "form-control", @id = "find_ZSubType" })
-                </td>
-            </tr>*@
         <tr>
             <td>
                 Тип доминирующего пастбища
@@ -323,14 +295,6 @@
                 <input type="text" id="find_korm_avgye_1" class="form-control" style="width: 110px; display: inline;" /> - <input type="text" id="find_korm_avgye_2" class="form-control" style="width: 110px; display: inline;" />
             </td>
         </tr>
-        @*<tr>
-                <td>
-                    Площадь, га
-                </td>
-                <td style="padding-left: 10px;">
-                    <input type="text" id="find_area_1" class="form-control" style="width: 110px; display: inline;" /> - <input type="text" id="find_area_2" class="form-control" style="width: 110px; display: inline;" />
-                </td>
-            </tr>*@
         <tr>
             <td>
                 Рекомендация по сезонам
@@ -389,7 +353,6 @@
         <ul>
             <li><a href="#tabs4">Урожайность, кормозапас</a></li>
             <li><a href="#tabs1">Структура земель</a></li>
-            @*<li><a href="#tabs2">Подкатегории</a></li>*@
             <li><a href="#tabs3">Рекомендации по сезонам</a></li>
         </ul>
         <div id="tabs4" style="height:calc(100% - 50px); width:100%;">
@@ -409,7 +372,6 @@
             </table>
         </div>
         <div id="tabs1" style="height:calc(100% - 50px); width:100%;"></div>
-        @*<div id="tabs2" style="height:calc(100% - 50px); width:100%;"></div>*@
         <div id="tabs3" style="height:calc(100% - 50px); width:100%;"></div>
     </div>
 </div>
@@ -417,11 +379,6 @@
 @* Окно легенды *@
 <div id="dialog_legend" title="Легенда" hidden="hidden" style="box-sizing: content-box;">
     <img src="~/Images/Maps/zemfondpol150.jpg" style="width:550px;" />
-    @*<img src="~/Images/Maps/zemfondpol2018.jpg" style="width:550px;" />*@
-</div>
-
-<div hidden="hidden">
-    @*<input id="WWW" value="@ViewBag.WWW" />*@
 </div>
 
 <script>
@@ -441,22 +398,6 @@
         source: new ol.source.OSM()
     });
 
-    //// источник данных и слой дорог, населенных пунктов, водоемов
-    //var Source_base2 = new ol.source.ImageWMS({
-    //    url: WWW + 'Pastures/wms?',
-    //    params: {
-    //        'LAYERS': 'Pastures:base2',
-    //        'VERSION': '1.1.0',
-    //        'FORMAT': 'image/png',
-    //        //'TILED': true
-    //    },
-    //    serverType: 'geoserver'
-    //});
-    //var Layer_base2 =
-    //    new ol.layer.Image({
-    //        source: Source_base2
-    //    });
-    
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
         url: WWW + 'Pastures/wms?',
@@ -472,7 +413,7 @@
         new ol.layer.Tile({
             source: Source_hdrlin
         });
-    
+
     // источник данных и слой Гидрография (полигоны)
     var Source_hdrpol = new ol.source.ImageWMS({
         url: WWW + 'Pastures/wms?',
@@ -613,7 +554,7 @@
             })
         })
     });
-    
+
     // векторный слой земельных запасов (не отображается на карте)
     var Layer_zemfondpol_v = new ol.layer.Vector();
     // векторный слой областей (не отображается на карте)
@@ -790,8 +731,8 @@
             Layer_adm123pol,            // 7
             Layer_select_cato,          // 8
             Layer_poppol,               // 9
-            Layer_poppnt,                // 10
-            Layer_hdrpol               // 4
+            Layer_poppnt,               // 10
+            Layer_hdrpol                // 4
             ],
         target: 'map',
         view: view
@@ -866,103 +807,6 @@
                 Layer_hdrlin.setVisible(true);
             }
         }
-
-        //var map = evt.map;
-        //var extent = map.getView().calculateExtent(map.getSize());
-        //var bottomLeft = ol.extent.getBottomLeft(extent);
-        //var topRight = ol.extent.getTopRight(extent);
-        //var exRight = ol.extent.getTopRight(ex)[0];
-        //var exLeft = ol.extent.getBottomLeft(ex)[0];
-        //var exTop = ol.extent.getTopRight(ex)[1];
-        //var exBottom = ol.extent.getBottomLeft(ex)[1];
-        //// границы
-        //// северо-восток
-        //if (topRight[0] > exRight && topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]);
-        //}
-        //    // юго-восток
-        //else if (bottomLeft[1] < exBottom && topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // юго-запад
-        //else if (bottomLeft[0] < exLeft && bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // северо-запад
-        //else if (topRight[1] > exTop && bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
-        //    // восток
-        //else if (topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // юг
-        //else if (bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // запад
-        //else if (bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // север
-        //else if (topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
     }
     map.on('moveend', onMoveEnd);
 
@@ -972,15 +816,12 @@
         Source_select_zemfondpol.clear();
 
         document.getElementById("info_type_k").innerHTML = "";
-        //document.getElementById("info_subtype_k").innerHTML = "";
         document.getElementById("info_dominant_t").innerHTML = "";
         document.getElementById("info_ur_avgyear").innerHTML = "";
         document.getElementById("info_korm_avgye").innerHTML = "";
-        //document.getElementById("info_area").innerHTML = "";
         document.getElementById("info_s_recomend").innerHTML = "";
 
         var viewResolution = (view.getResolution());
-
         var url_zemfondpol = Source_zemfondpol.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
             {
@@ -1001,40 +842,40 @@
             }).then(function (data) {
                 // если слой земельных запасов включен
                 if (Layer_zemfondpol.getVisible()) {
-                    // работа с земельным запасом в виде вектора (выделение земельного запаса)
-                    var polyFeature = new ol.Feature({
-                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-                    });
-                    Source_select_zemfondpol.addFeature(polyFeature);
-
-                    // получение информации о земельном запасе
-                    $.ajax({
-                        url: '@Url.Action("GetZZInfo")',
-                        data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            document.getElementById("info_type_k").innerHTML = data.type_k;
-                            //document.getElementById("info_subtype_k").innerHTML = data.subtype_k;
-                            document.getElementById("info_dominant_t").innerHTML = data.dominant_t;
-                            document.getElementById("info_ur_avgyear").innerHTML = data.ur_avgyear;
-                            document.getElementById("info_korm_avgye").innerHTML = data.korm_avgye;
-                            //document.getElementById("info_area").innerHTML = data.area;
-                            document.getElementById("info_s_recomend").innerHTML = data.s_recomend;
-                        },
-                        error: function () {
-                        }
-                    });
-                    // отображение информации о земельном запасе
-                    if (dialog_info_zz_first) {
-                        dialog_info_zz_first = false;
-                        $("#dialog_info_zz").dialog({
-                            width: 500,
-                            height: 220,
+                    if (data.features.length > 0) {
+                        // работа с земельным запасом в виде вектора (выделение земельного запаса)
+                        var polyFeature = new ol.Feature({
+                            geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
                         });
-                    }
-                    else {
-                        $("#dialog_info_zz").dialog({ });
+                        Source_select_zemfondpol.addFeature(polyFeature);
+
+                        // получение информации о земельном запасе
+                        $.ajax({
+                            url: '@Url.Action("GetZZInfo")',
+                            data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                document.getElementById("info_type_k").innerHTML = data.type_k;
+                                document.getElementById("info_dominant_t").innerHTML = data.dominant_t;
+                                document.getElementById("info_ur_avgyear").innerHTML = data.ur_avgyear;
+                                document.getElementById("info_korm_avgye").innerHTML = data.korm_avgye;
+                                document.getElementById("info_s_recomend").innerHTML = data.s_recomend;
+                            },
+                            error: function () {
+                            }
+                        });
+                        // отображение информации о земельном запасе
+                        if (dialog_info_zz_first) {
+                            dialog_info_zz_first = false;
+                            $("#dialog_info_zz").dialog({
+                                width: 500,
+                                height: 220,
+                            });
+                        }
+                        else {
+                            $("#dialog_info_zz").dialog({});
+                        }
                     }
                 }
             });
@@ -1174,9 +1015,6 @@
             if ((document.getElementById("find_ZType").options[document.getElementById("find_ZType").selectedIndex].value != '') && (feature.getProperties().type_k != document.getElementById("find_ZType").options[document.getElementById("find_ZType").selectedIndex].value)) {
                 continue;
             }
-            //if ((document.getElementById("find_ZSubType").options[document.getElementById("find_ZSubType").selectedIndex].value != '') && (feature.getProperties().subtype_k != document.getElementById("find_ZSubType").options[document.getElementById("find_ZSubType").selectedIndex].value)) {
-            //    continue;
-            //}
             if ((document.getElementById("find_DominantType").options[document.getElementById("find_DominantType").selectedIndex].value != '') && (feature.getProperties().dominant_t != document.getElementById("find_DominantType").options[document.getElementById("find_DominantType").selectedIndex].value)) {
                 continue;
             }
@@ -1192,12 +1030,6 @@
             if ((document.getElementById("find_korm_avgye_2").value != '') && (parseFloat(feature.getProperties().korm_avgye) > parseFloat(document.getElementById("find_korm_avgye_2").value))) {
                 continue;
             }
-            //if ((document.getElementById("find_area_1").value != '') && (parseFloat(feature.getProperties().area) < parseFloat(document.getElementById("find_area_1").value))) {
-            //    continue;
-            //}
-            //if ((document.getElementById("find_area_2").value != '') && (parseFloat(feature.getProperties().area) > parseFloat(document.getElementById("find_area_2").value))) {
-            //    continue;
-            //}
             if ((document.getElementById("find_Recommend").options[document.getElementById("find_Recommend").selectedIndex].value != '') && (feature.getProperties().s_recomend != document.getElementById("find_Recommend").options[document.getElementById("find_Recommend").selectedIndex].value)) {
                 continue;
             }
@@ -1221,12 +1053,6 @@
     im.mask(document.getElementById("find_korm_avgye_2"));
     Inputmask({ "mask": "9 999 999" }).mask(document.getElementById("find_korm_avgye_2"));
     $('#find_korm_avgye_2').inputmask({ "placeholder": "0" });
-    //im.mask(document.getElementById("find_area_1"));
-    //Inputmask({ "mask": "9 999 999" }).mask(document.getElementById("find_area_1"));
-    //$('#find_area_1').inputmask({ "placeholder": "0" });
-    //im.mask(document.getElementById("find_area_2"));
-    //Inputmask({ "mask": "9 999 999" }).mask(document.getElementById("find_area_2"));
-    //$('#find_area_2').inputmask({ "placeholder": "0" });
 
     // окно поиска КАТО
     function ShowFindKATO() {
@@ -1466,13 +1292,6 @@
                         }
                     }
                 });
-                //$.plot('#tabs2', data.zsubtypes, {
-                //    series: {
-                //        pie: {
-                //            show: true
-                //        }
-                //    }
-                //});
                 $.plot('#tabs3', data.recommens, {
                     series: {
                         pie: {
@@ -1503,9 +1322,6 @@
     };
 
     $(document).ready(function (e) {
-        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        });
-
         $("#MapSources").val("OpenStreetMap");
 
         // высота карты
@@ -1518,7 +1334,7 @@
         document.getElementById('sidepanel').setAttribute("style", "width:0px");
         document.getElementById('sidepanel').setAttribute("style", "display:none");
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1565,7 +1381,7 @@
         var button = document.getElementById('sidepanelshowhide');
         button.innerHTML = '«';
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());

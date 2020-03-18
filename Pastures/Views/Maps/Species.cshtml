@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Породное районирование сельскохозяйственных животных";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -110,13 +109,6 @@
                                 Базовые слои
                             </u>
                         </span>
-                        @*<fieldset id="layer0">
-                                <label class="checkbox" for="visible0">
-                                    <input id="visible0" class="visible" type="checkbox" />Отображать
-                                </label>
-                                <label>Прозрачность</label>
-                                <input class="opacity" type="range" min="0" max="100" step="1" />
-                            </fieldset>*@
                         <ul>
                             <li>
                                 <span>
@@ -190,13 +182,6 @@
                                 Породное районирование сельскохозяйственных животных
                             </u>
                         </span>
-                        @*<fieldset id="layer1">
-                                <label class="checkbox" for="visible1">
-                                    <input id="visible1" class="visible" type="checkbox" />Отображать
-                                </label>
-                                <label>Прозрачность</label>
-                                <input class="opacity" type="range" min="0" max="100" step="1" />
-                            </fieldset>*@
                         <fieldset id="layer1">
                             <form action="" id="CATOSpecies">
                                 <input id="radiosok" type="radio" name="CATO" value="sok" checked> Сельские округи<br>
@@ -296,12 +281,6 @@
         </tr>
     </table>
     <table>
-        @*<tr>
-                <td>
-                    Всего голов
-                </td>
-                <td id="info_totalgoals" style="padding-left: 10px; text-align: right;"></td>
-            </tr>*@
         <tr>
             <td>
                 КРС, голов
@@ -365,10 +344,6 @@
     <img src="~/Images/Maps/species.jpg" style="width:550px;" />
 </div>
 
-<div hidden="hidden">
-    @*<input id="WWW" value="@ViewBag.WWW" />*@
-</div>
-
 <script>
     $("#maindiv").LoadingOverlay("show");
 
@@ -384,22 +359,6 @@
     var Layer_Base = new ol.layer.Tile({
         source: new ol.source.OSM()
     });
-
-    //// источник данных и слой дорог, населенных пунктов, водоемов
-    //var Source_base2 = new ol.source.ImageWMS({
-    //    url: WWW + 'Pastures/wms?',
-    //    params: {
-    //        'LAYERS': 'Pastures:base2',
-    //        'VERSION': '1.1.0',
-    //        'FORMAT': 'image/png',
-    //        //'TILED': true
-    //    },
-    //    serverType: 'geoserver'
-    //});
-    //var Layer_base2 =
-    //    new ol.layer.Image({
-    //        source: Source_base2
-    //    });
 
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
@@ -765,12 +724,6 @@
             zoom
         ]),
         layers: [
-            //Layer_Base,
-            //Layer_species,
-            //Layer_select_species,
-            //Layer_adm123pol,
-            //Layer_select_cato,
-            //Layer_base2
             Layer_Base,                 // 0
             Layer_species,              // 1
             Layer_select_species,       // 2
@@ -779,8 +732,8 @@
             Layer_adm123pol,            // 6
             Layer_select_cato,          // 7
             Layer_poppol,               // 8
-            Layer_poppnt,                // 9
-            Layer_hdrpol               // 3
+            Layer_poppnt,               // 9
+            Layer_hdrpol                // 3
         ],
         target: 'map',
         view: view
@@ -803,7 +756,6 @@
                 zoom: zoom
             });
             map.setView(view);
-
             rotation = parseFloat(parts[3]);
         }
     }
@@ -855,103 +807,6 @@
                 Layer_hdrlin.setVisible(true);
             }
         }
-
-        //var map = evt.map;
-        //var extent = map.getView().calculateExtent(map.getSize());
-        //var bottomLeft = ol.extent.getBottomLeft(extent);
-        //var topRight = ol.extent.getTopRight(extent);
-        //var exRight = ol.extent.getTopRight(ex)[0];
-        //var exLeft = ol.extent.getBottomLeft(ex)[0];
-        //var exTop = ol.extent.getTopRight(ex)[1];
-        //var exBottom = ol.extent.getBottomLeft(ex)[1];
-        //// границы
-        //// северо-восток
-        //if (topRight[0] > exRight && topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]);
-        //}
-        //    // юго-восток
-        //else if (bottomLeft[1] < exBottom && topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // юго-запад
-        //else if (bottomLeft[0] < exLeft && bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // северо-запад
-        //else if (topRight[1] > exTop && bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
-        //    // восток
-        //else if (topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // юг
-        //else if (bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // запад
-        //else if (bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // север
-        //else if (topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
     }
     map.on('moveend', onMoveEnd);
 
@@ -961,7 +816,6 @@
         Source_select_species.clear();
 
         document.getElementById("info_CATO").innerHTML = "";
-        //document.getElementById("info_totalgoals").innerHTML = "";
         document.getElementById("info_cattle").innerHTML = "";
         document.getElementById("info_horses").innerHTML = "";
         document.getElementById("info_smallcattle").innerHTML = "";
@@ -974,7 +828,6 @@
         document.getElementById("info_pastures").innerHTML = "";
 
         var viewResolution = (view.getResolution());
-
         var url_species = Layer_species.getSource().getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
             {
@@ -983,7 +836,6 @@
             });
 
         if (url_species) {
-
             // данные со слоев
             jQuery.ajax({
                 jsonp: false,
@@ -994,69 +846,68 @@
                 dataType: 'jsonp',
                 error: function () {
                 }
-            }).then(function (data) {
-
+            }).then(function (datal) {
                 // если слой species включен
                 if (Layer_species.getVisible()) {
-                    // работа со species в виде вектора (выделение species)
-                    var polyFeature = new ol.Feature({
-                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-                    });
-                    Source_select_species.addFeature(polyFeature);
-
-                    // получение информации о species
-                    var type = 0;
-                    if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'sok') {
-                        type = 3;
-                    }
-                    if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'ray') {
-                        type = 2;
-                    }
-                    if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'obl') {
-                        type = 1;
-                    }
-
-                    $.ajax({
-                        url: '@Url.Action("GetCATOSpeciesInfo")',
-                        data: JSON.stringify({ "objectid": data.features[0].properties.objectid, "type": type }),
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            document.getElementById("info_CATO").innerHTML = data.CATO;
-                            //document.getElementById("info_totalgoals").innerHTML = data.totalgoals;
-                            document.getElementById("info_cattle").innerHTML = data.cattle;
-                            document.getElementById("info_horses").innerHTML = data.horses;
-                            document.getElementById("info_smallcattle").innerHTML = data.smallcattle;
-                            document.getElementById("info_camels").innerHTML = data.camels;
-                            document.getElementById("info_conditional").innerHTML = data.conditional;
-                            document.getElementById("info_date").innerHTML = data.date;
-                            document.getElementById("info_type_k").innerHTML = data.type_k;
-                            document.getElementById("info_population").innerHTML = data.population;
-                            document.getElementById("info_pastures").innerHTML = data.pastures;
-                            var content = "<table>"
-                            for (i = 0; i < data.catospecies.length; i++) {
-                                content += '<tr><td>' + data.catospecies[i].Type + '</td>'
-                                    + '<td style="padding-left: 10px;">' + data.catospecies[i].Breed + '</td>'
-                                    + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + data.catospecies[i].Code + ')"><i><font size="1">Подробнее</font></i></a>' + '</td>' + '</tr>';
-                            }
-                            content += "</table>"
-                            $('#table_info_species').append(content);
-
-                        },
-                        error: function () {
-                        }
-                    });
-                    // отображение информации о species
-                    if (dialog_info_species) {
-                        dialog_info_species = false;
-                        $("#dialog_info_species").dialog({
-                            width: 500,
-                            height: 400,
-                            position: { my: "right", at: "center", of: window }
+                    if (datal.features.length > 0) {
+                        // работа со species в виде вектора (выделение species)
+                        var polyFeature = new ol.Feature({
+                            geometry: new ol.geom.MultiPolygon(datal.features[0].geometry.coordinates)
                         });
-                    }
-                    else {
-                        $("#dialog_info_species").dialog({});
+                        Source_select_species.addFeature(polyFeature);
+                        // получение информации о species
+                        var type = 0;
+                        if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'sok') {
+                            type = 3;
+                        }
+                        if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'ray') {
+                            type = 2;
+                        }
+                        if ($('input[name=CATO]:checked', '#CATOSpecies').val() == 'obl') {
+                            type = 1;
+                        }
+                        $.ajax({
+                            url: '@Url.Action("GetCATOSpeciesInfo")',
+                            data: JSON.stringify({ "objectid": datal.features[0].properties.objectid, "type": type }),
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                document.getElementById("info_CATO").innerHTML = data.CATO;
+                                document.getElementById("info_cattle").innerHTML = data.cattle;
+                                document.getElementById("info_horses").innerHTML = data.horses;
+                                document.getElementById("info_smallcattle").innerHTML = data.smallcattle;
+                                document.getElementById("info_camels").innerHTML = data.camels;
+                                document.getElementById("info_conditional").innerHTML = data.conditional;
+                                document.getElementById("info_date").innerHTML = data.date;
+                                document.getElementById("info_type_k").innerHTML = data.type_k;
+                                document.getElementById("info_population").innerHTML = data.population;
+                                document.getElementById("info_pastures").innerHTML = data.pastures;
+                                if (data.catospecies) {
+                                    var content = "<table>"
+                                    for (i = 0; i < data.catospecies.length; i++) {
+                                        content += '<tr><td>' + data.catospecies[i].Type + '</td>'
+                                            + '<td style="padding-left: 10px;">' + data.catospecies[i].Breed + '</td>'
+                                            + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + data.catospecies[i].Code + ')"><i><font size="1">Подробнее</font></i></a>' + '</td>' + '</tr>';
+                                    }
+                                    content += "</table>"
+                                    $('#table_info_species').append(content);
+                                }
+                            },
+                            error: function () {
+                            }
+                        });
+                        // отображение информации о species
+                        if (dialog_info_species) {
+                            dialog_info_species = false;
+                            $("#dialog_info_species").dialog({
+                                width: 500,
+                                height: 400,
+                                position: { my: "right", at: "center", of: window }
+                            });
+                        }
+                        else {
+                            $("#dialog_info_species").dialog({});
+                        }
                     }
                 }
             });
@@ -1103,8 +954,7 @@
         $("#MapSources").val("OpenStreetMap");
         var Source = new ol.source.OSM({});
         Layer_Base.setSource(Source);
-        Source_select_pasturepol.clear();
-        Source_found_pasturepol.clear();
+        Source_select_species.clear();
         Source_select_cato.clear();
         $("#catoobl").val('');
         $("#catoray").val('');
@@ -1446,7 +1296,6 @@
     // информация о КАТО
     function GetCATOInfo() {
         document.getElementById("info_CATO").innerHTML = "";
-        //document.getElementById("info_totalgoals").innerHTML = "";
         document.getElementById("info_cattle").innerHTML = "";
         document.getElementById("info_horses").innerHTML = "";
         document.getElementById("info_smallcattle").innerHTML = "";
@@ -1479,7 +1328,6 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 document.getElementById("info_CATO").innerHTML = data.CATO;
-                //document.getElementById("info_totalgoals").innerHTML = data.totalgoals;
                 document.getElementById("info_cattle").innerHTML = data.cattle;
                 document.getElementById("info_horses").innerHTML = data.horses;
                 document.getElementById("info_smallcattle").innerHTML = data.smallcattle;
@@ -1522,16 +1370,14 @@
             Layer_adm123pol.setSource(Source_adm123pol);
             Layer_species.setSource(Source_species3);
         }
-        else
-            if ($(this).val() == 'ray') {
-                Layer_adm123pol.setSource(Source_adm12pol);
-                Layer_species.setSource(Source_species2);
-            }
-            else
-                if ($(this).val() == 'obl') {
-                    Layer_adm123pol.setSource(Source_adm1pol);
-                    Layer_species.setSource(Source_species1);
-                }
+        else if ($(this).val() == 'ray') {
+            Layer_adm123pol.setSource(Source_adm12pol);
+            Layer_species.setSource(Source_species2);
+        }
+        else if ($(this).val() == 'obl') {
+            Layer_adm123pol.setSource(Source_adm1pol);
+            Layer_species.setSource(Source_species1);
+        }
     });
 
     // Подробная информация о породе
@@ -1586,9 +1432,6 @@
     };
 
     $(document).ready(function (e) {
-        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        });
-
         $("#MapSources").val("OpenStreetMap");
 
         // высота карты
@@ -1601,7 +1444,7 @@
         document.getElementById('sidepanel').setAttribute("style", "width:0px");
         document.getElementById('sidepanel').setAttribute("style", "display:none");
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1648,7 +1491,7 @@
         var button = document.getElementById('sidepanelshowhide');
         button.innerHTML = '«';
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());

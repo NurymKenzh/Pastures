@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Обводнение пастбищ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -114,13 +113,6 @@
                                 Базовые слои
                             </u>
                         </span>
-                        @*<fieldset id="layer0">
-                                <label class="checkbox" for="visible0">
-                                    <input id="visible0" class="visible" type="checkbox" />Отображать
-                                </label>
-                                <label>Прозрачность</label>
-                                <input class="opacity" type="range" min="0" max="100" step="1" />
-                            </fieldset>*@
                         <ul>
                             <li>
                                 <span>
@@ -397,10 +389,6 @@
     <img src="~/Images/Maps/wells.jpg" style="width:550px;" />
 </div>
 
-<div hidden="hidden">
-    @*<input id="WWW" value="@ViewBag.WWW" />*@
-</div>
-
 <script>
     $("#maindiv").LoadingOverlay("show");
 
@@ -419,23 +407,6 @@
         source: new ol.source.OSM()
     });
 
-    //// источник данных и слой дорог, населенных пунктов, водоемов
-    //var Source_base2 = new ol.source.ImageWMS({
-    //    url: WWW + 'Pastures/wms?',
-    //    params: {
-    //        'LAYERS': 'Pastures:base2',
-    //        'VERSION': '1.1.0',
-    //        'FORMAT': 'image/png',
-    //        //'TILED': true
-    //    },
-    //    serverType: 'geoserver'
-    //});
-    //var Layer_base2 =
-    //    new ol.layer.Image({
-    //        source: Source_base2
-    //    });
-
-
     // источник данных и слой wellspol0
     var Source_wellspol0 = new ol.source.TileWMS({
         url: WWW + 'Pastures/wms?',
@@ -451,6 +422,8 @@
         new ol.layer.Tile({
             source: Source_wellspol0
         });
+    Layer_wellspol0.setVisible(false);
+
 
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
@@ -813,15 +786,6 @@
             zoom
         ]),
         layers: [
-            //Layer_Base,
-            //Layer_wellspol,
-            //Layer_select_wellspol,
-            //Layer_wellspnt,
-            //Layer_found_wellspnt,
-            //Layer_select_wellspnt,
-            //Layer_adm123pol,
-            //Layer_select_cato,
-            //Layer_base2
             Layer_Base,                 // 0
             Layer_wellspol0,
             Layer_wellspol,             // 1
@@ -834,8 +798,8 @@
             Layer_adm123pol,            // 9
             Layer_select_cato,          // 10
             Layer_poppol,               // 11
-            Layer_poppnt,                // 12
-            Layer_hdrpol               // 6
+            Layer_poppnt,               // 12
+            Layer_hdrpol                // 6
         ],
         target: 'map',
         view: view
@@ -910,103 +874,6 @@
                 Layer_hdrlin.setVisible(true);
             }
         }
-
-        //var map = evt.map;
-        //var extent = map.getView().calculateExtent(map.getSize());
-        //var bottomLeft = ol.extent.getBottomLeft(extent);
-        //var topRight = ol.extent.getTopRight(extent);
-        //var exRight = ol.extent.getTopRight(ex)[0];
-        //var exLeft = ol.extent.getBottomLeft(ex)[0];
-        //var exTop = ol.extent.getTopRight(ex)[1];
-        //var exBottom = ol.extent.getBottomLeft(ex)[1];
-        //// границы
-        //// северо-восток
-        //if (topRight[0] > exRight && topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]);
-        //}
-        //    // юго-восток
-        //else if (bottomLeft[1] < exBottom && topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // юго-запад
-        //else if (bottomLeft[0] < exLeft && bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // северо-запад
-        //else if (topRight[1] > exTop && bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
-        //    // восток
-        //else if (topRight[0] > exRight) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] - topRight[0] + exRight,
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // юг
-        //else if (bottomLeft[1] < exBottom) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] + exBottom - bottomLeft[1]]
-        //           );
-        //}
-        //    // запад
-        //else if (bottomLeft[0] < exLeft) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0] + exLeft - bottomLeft[0],
-        //            map.getView().getCenter()[1]]
-        //           );
-        //}
-        //    // север
-        //else if (topRight[1] > exTop) {
-        //    var pan = ol.animation.pan({
-        //        source: map.getView().getCenter()
-        //    });
-        //    map.beforeRender(pan);
-        //    map.getView().setCenter(
-        //            [map.getView().getCenter()[0],
-        //            map.getView().getCenter()[1] - topRight[1] + exTop]
-        //           );
-        //}
     }
     map.on('moveend', onMoveEnd);
 
@@ -1056,46 +923,48 @@
                 if (data.features.length > 0) {
                     // если слой водоисточников включен
                     if (Layer_wellspnt.getVisible()) {
-                        // работа с водоисточником в виде вектора (выделение водоисточника)
-                        var polyFeature = new ol.Feature({
-                            geometry: new ol.geom.Point(data.features[0].geometry.coordinates)
-                        });
-                        Source_select_wellspnt.addFeature(polyFeature);
-                        // получение информации о водоисточнике
-                        $.ajax({
-                            url: '@Url.Action("GetWellInfo")',
-                            data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
-                            type: 'POST',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (ajaxdata) {
-                                document.getElementById("info_num").innerHTML = ajaxdata.num;
-                                document.getElementById("info_usl").innerHTML = ajaxdata.usl;
-                                document.getElementById("info_wat_seepag").innerHTML = ajaxdata.wat_seepag;
-                                document.getElementById("info_debit").innerHTML = ajaxdata.debit;
-                                document.getElementById("info_decrease").innerHTML = ajaxdata.decrease;
-                                document.getElementById("info_depth").innerHTML = ajaxdata.depth;
-                                document.getElementById("info_minerali").innerHTML = ajaxdata.minerali;
-                                document.getElementById("info_chemical_c").innerHTML = ajaxdata.chemical_c;
-                                if (data.features[0].properties.sost == 1) {
-                                    document.getElementById("info_sost").innerHTML = 'действующий';
-                                }
-                                else if (data.features[0].properties.sost == 2) {
-                                    document.getElementById("info_sost").innerHTML = 'не используется';
-                                }
-                            },
-                            error: function () {
-                            }
-                        });
-                        // отображение информации о водоисточнике
-                        if (dialog_info_wellspnt_first) {
-                            dialog_info_wellspnt_first = false;
-                            $("#dialog_info_wellspnt").dialog({
-                                width: 500,
-                                height: 300,
+                        if (data.features.length > 0) {
+                            // работа с водоисточником в виде вектора (выделение водоисточника)
+                            var polyFeature = new ol.Feature({
+                                geometry: new ol.geom.Point(data.features[0].geometry.coordinates)
                             });
-                        }
-                        else {
-                            $("#dialog_info_wellspnt").dialog({});
+                            Source_select_wellspnt.addFeature(polyFeature);
+                            // получение информации о водоисточнике
+                            $.ajax({
+                                url: '@Url.Action("GetWellInfo")',
+                                data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
+                                type: 'POST',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (ajaxdata) {
+                                    document.getElementById("info_num").innerHTML = ajaxdata.num;
+                                    document.getElementById("info_usl").innerHTML = ajaxdata.usl;
+                                    document.getElementById("info_wat_seepag").innerHTML = ajaxdata.wat_seepag;
+                                    document.getElementById("info_debit").innerHTML = ajaxdata.debit;
+                                    document.getElementById("info_decrease").innerHTML = ajaxdata.decrease;
+                                    document.getElementById("info_depth").innerHTML = ajaxdata.depth;
+                                    document.getElementById("info_minerali").innerHTML = ajaxdata.minerali;
+                                    document.getElementById("info_chemical_c").innerHTML = ajaxdata.chemical_c;
+                                    if (data.features[0].properties.sost == 1) {
+                                        document.getElementById("info_sost").innerHTML = 'действующий';
+                                    }
+                                    else if (data.features[0].properties.sost == 2) {
+                                        document.getElementById("info_sost").innerHTML = 'не используется';
+                                    }
+                                },
+                                error: function () {
+                                }
+                            });
+                            // отображение информации о водоисточнике
+                            if (dialog_info_wellspnt_first) {
+                                dialog_info_wellspnt_first = false;
+                                $("#dialog_info_wellspnt").dialog({
+                                    width: 500,
+                                    height: 300,
+                                });
+                            }
+                            else {
+                                $("#dialog_info_wellspnt").dialog({});
+                            }
                         }
                     }
                 }
@@ -1217,7 +1086,7 @@
         visibilityInput.on('change', function () {
             layer.setVisible(this.checked);
             if (layerid == '#layer0') {
-                Layer_wellspol0.setVisible(this.checked);
+                //Layer_wellspol0.setVisible(this.checked);
             }
             if (layerid == '#layer2') {
                 Layer_select_wellspol.setVisible(this.checked);
@@ -1245,19 +1114,8 @@
         var opacityInput = $(layerid + ' input.opacity');
         opacityInput.on('input change', function () {
             layer.setOpacity(parseFloat(this.value / 100));
-            //if (layerid == '#layer0') {
-            //    Layer_base2.setOpacity(parseFloat(this.value / 100));
-            //}
-            //if (layerid == '#layer1') {
-            //    Layer_select_wellspnt.setOpacity(parseFloat(this.value / 100));
-            //    Layer_found_wellspnt.setOpacity(parseFloat(this.value / 100));
-            //    Layer_wellspol.setOpacity(parseFloat(this.value / 100));
-            //}
-            //if (layerid == '#layer4') {
-            //    Layer_select_cato.setOpacity(parseFloat(this.value / 100));
-            //}
             if (layerid == '#layer0') {
-                Layer_wellspol0.setOpacity(parseFloat(this.value / 100));
+                //Layer_wellspol0.setOpacity(parseFloat(this.value / 100));
             }
             if (layerid == '#layer2') {
                 Layer_select_wellspol.setOpacity(parseFloat(this.value / 100));
@@ -1513,9 +1371,6 @@
     };
 
     $(document).ready(function (e) {
-        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        });
-
         $("#MapSources").val("OpenStreetMap");
 
         // высота карты
@@ -1528,7 +1383,7 @@
         document.getElementById('sidepanel').setAttribute("style", "width:0px");
         document.getElementById('sidepanel').setAttribute("style", "display:none");
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1575,7 +1430,7 @@
         var button = document.getElementById('sidepanelshowhide');
         button.innerHTML = '«';
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
