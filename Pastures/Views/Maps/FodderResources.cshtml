@@ -495,7 +495,6 @@
 <script>
     $("#maindiv").LoadingOverlay("show");
 
-    //var WWW = window.location.hostname;
     var WWW = '@ViewBag.geoserverURL';
 
     var dialog_info_pasture_first = true;
@@ -1016,12 +1015,6 @@
     function ChangeMapSource(val) {
         if (val == 'OpenStreetMap') {
             var Source = new ol.source.OSM({});
-            Layer_Base.setSource(Source);
-        }
-        if (val == 'OpenCycleMap') {
-            var Source = new ol.source.OSM({
-                url: 'http://{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
-            });
             Layer_Base.setSource(Source);
         }
         if (val == 'ArcGIS') {

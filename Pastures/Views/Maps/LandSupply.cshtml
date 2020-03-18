@@ -427,7 +427,7 @@
 <script>
     $("#maindiv").LoadingOverlay("show");
 
-    var WWW = window.location.hostname;
+    var WWW = '@ViewBag.geoserverURL';
 
     var dialog_info_zz_first = true;
     var dialog_find_zz_first = true;
@@ -443,7 +443,7 @@
 
     //// источник данных и слой дорог, населенных пунктов, водоемов
     //var Source_base2 = new ol.source.ImageWMS({
-    //    url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+    //    url: WWW + 'Pastures/wms?',
     //    params: {
     //        'LAYERS': 'Pastures:base2',
     //        'VERSION': '1.1.0',
@@ -459,7 +459,7 @@
     
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:hdrlin',
             'VERSION': '1.1.0',
@@ -475,7 +475,7 @@
     
     // источник данных и слой Гидрография (полигоны)
     var Source_hdrpol = new ol.source.ImageWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:hdrpol',
             'VERSION': '1.1.0',
@@ -491,7 +491,7 @@
 
     // источник данных и слой Населённые пункты (точки)
     var Source_poppnt = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:poppnt',
             'VERSION': '1.1.0',
@@ -507,7 +507,7 @@
 
     // источник данных и слой Населённые пункты (полигоны)
     var Source_poppol = new ol.source.ImageWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:poppol',
             'VERSION': '1.1.0',
@@ -523,7 +523,7 @@
 
     // источник данных и слой Автодороги и пути (линии)
     var Source_rdslin = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:rdslin',
             'VERSION': '1.1.0',
@@ -539,7 +539,7 @@
 
     // источник данных и слой adm123pol
     var Source_adm123pol = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:adm123pol',
             'VERSION': '1.1.0',
@@ -570,7 +570,7 @@
 
     // источник данных и слой zemfondpol
     var Source_zemfondpol = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:zemfondpol',
             'VERSION': '1.1.0',
@@ -623,7 +623,7 @@
     // векторный слой сельских округов (не отображается на карте)
     var Layer_adm3pol_v = new ol.layer.Vector();
     // векторный слой земельных запасов
-    var url_zemfondpol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:zemfondpol&outputFormat=text/javascript&format_options=callback:getJson";
+    var url_zemfondpol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:zemfondpol&outputFormat=text/javascript&format_options=callback:getJson";
     $.ajax({
         jsonp: false,
         jsonpCallback: 'getJson',
@@ -640,7 +640,7 @@
                 })
             });
             // векторный слой областей
-            var url_adm1pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm1pol&outputFormat=text/javascript&format_options=callback:getJson";
+            var url_adm1pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm1pol&outputFormat=text/javascript&format_options=callback:getJson";
             $.ajax({
                 jsonp: false,
                 jsonpCallback: 'getJson',
@@ -657,7 +657,7 @@
                         })
                     });
                     // векторный слой районов
-                    var url_adm2pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm2pol&outputFormat=text/javascript&format_options=callback:getJson";
+                    var url_adm2pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm2pol&outputFormat=text/javascript&format_options=callback:getJson";
                     $.ajax({
                         jsonp: false,
                         jsonpCallback: 'getJson',
@@ -674,7 +674,7 @@
                                 })
                             });
                             // векторный слой сельских округов
-                            var url_adm3pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm3pol&outputFormat=text/javascript&format_options=callback:getJson";
+                            var url_adm3pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm3pol&outputFormat=text/javascript&format_options=callback:getJson";
                             $.ajax({
                                 jsonp: false,
                                 jsonpCallback: 'getJson',
@@ -1045,12 +1045,6 @@
     function ChangeMapSource(val) {
         if (val == 'OpenStreetMap') {
             var Source = new ol.source.OSM({});
-            Layer_Base.setSource(Source);
-        }
-        if (val == 'OpenCycleMap') {
-            var Source = new ol.source.OSM({
-                url: 'http://{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
-            });
             Layer_Base.setSource(Source);
         }
         if (val == 'ArcGIS') {

@@ -47,7 +47,6 @@ namespace Pastures.Controllers
             List<SelectListItem> MapSources = new List<SelectListItem>();
             var MapSourcesData = new[]{
                     new SelectListItem{ Value="OpenStreetMap",Text="Open Street Map", Selected = true},
-                    new SelectListItem{ Value="OpenCycleMap",Text="Open Cycle Map"},
                     new SelectListItem{ Value="ArcGIS",Text="ArcGIS"},
                     new SelectListItem{ Value="Bing",Text="Bing"},
                     new SelectListItem{ Value="BingAerial",Text="Bing Aerial"}
@@ -74,13 +73,11 @@ namespace Pastures.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult LandSupply()
         {
             List<SelectListItem> MapSources = new List<SelectListItem>();
             var MapSourcesData = new[]{
                     new SelectListItem{ Value="OpenStreetMap",Text="Open Street Map", Selected = true},
-                    new SelectListItem{ Value="OpenCycleMap",Text="Open Cycle Map"},
                     new SelectListItem{ Value="ArcGIS",Text="ArcGIS"},
                     new SelectListItem{ Value="Bing",Text="Bing"},
                     new SelectListItem{ Value="BingAerial",Text="Bing Aerial"}
@@ -105,13 +102,11 @@ namespace Pastures.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult Species()
         {
             List<SelectListItem> MapSources = new List<SelectListItem>();
             var MapSourcesData = new[]{
                     new SelectListItem{ Value="OpenStreetMap",Text="Open Street Map", Selected = true},
-                    new SelectListItem{ Value="OpenCycleMap",Text="Open Cycle Map"},
                     new SelectListItem{ Value="ArcGIS",Text="ArcGIS"},
                     new SelectListItem{ Value="Bing",Text="Bing"},
                     new SelectListItem{ Value="BingAerial",Text="Bing Aerial"}
@@ -131,13 +126,11 @@ namespace Pastures.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult PasturesBurden()
         {
             List<SelectListItem> MapSources = new List<SelectListItem>();
             var MapSourcesData = new[]{
                     new SelectListItem{ Value="OpenStreetMap",Text="Open Street Map", Selected = true},
-                    new SelectListItem{ Value="OpenCycleMap",Text="Open Cycle Map"},
                     new SelectListItem{ Value="ArcGIS",Text="ArcGIS"},
                     new SelectListItem{ Value="Bing",Text="Bing"},
                     new SelectListItem{ Value="BingAerial",Text="Bing Aerial"}
@@ -163,13 +156,11 @@ namespace Pastures.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult Wells()
         {
             List<SelectListItem> MapSources = new List<SelectListItem>();
             var MapSourcesData = new[]{
                     new SelectListItem{ Value="OpenStreetMap",Text="Open Street Map", Selected = true},
-                    new SelectListItem{ Value="OpenCycleMap",Text="Open Cycle Map"},
                     new SelectListItem{ Value="ArcGIS",Text="ArcGIS"},
                     new SelectListItem{ Value="Bing",Text="Bing"},
                     new SelectListItem{ Value="BingAerial",Text="Bing Aerial"}
