@@ -378,7 +378,7 @@ namespace Pastures.Controllers
                     .Select(c => c.Name)
                     .FirstOrDefault() + ")";
             }
-            //////////////
+            
             foreach (Otdel otdel in db.Otdels.OrderBy(o => o.Description).ToList())
             {
                 string label = otdel.Description;
@@ -405,7 +405,7 @@ namespace Pastures.Controllers
                     data = otdels[i].data
                 };
             }
-            //////////////
+            
             foreach (PType ptype in db.PTypes.OrderBy(p => p.Description).ToList())
             {
                 string label = ptype.Description;

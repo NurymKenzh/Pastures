@@ -1,15 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Кормовые ресурсы";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+
 <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-@*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -626,8 +623,7 @@
         params: {
             'LAYERS': 'Pastures:pasturepol',
             'VERSION': '1.1.0',
-            'FORMAT': 'image/png',
-            //'TILED': false
+            'FORMAT': 'image/png'
         },
         serverType: 'geoserver'
     });
@@ -964,47 +960,48 @@
                 // если слой пастбищ включен
                 if (Layer_pasturepol.getVisible()) {
                     // работа с пастбищем в виде вектора (выделение пастбища)
-                    var polyFeature = new ol.Feature({
-                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-                    });
-                    Source_select_pasturepol.addFeature(polyFeature);
-
-                    // получение информации о пастбище
-                    $.ajax({
-                        url: '@Url.Action("GetPastureInfo")',
-                        data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            document.getElementById("info_nomer_vydela").innerHTML = data.nomer_vydela;
-                            document.getElementById("info_class_id").innerHTML = data.class_id;
-                            document.getElementById("info_group_id").innerHTML = data.group_id;
-                            document.getElementById("info_group_id_lat").innerHTML = data.group_id_lat;
-                            document.getElementById("info_otdel_id").innerHTML = data.otdel_id;
-                            document.getElementById("info_ur_v").innerHTML = data.ur_v;
-                            document.getElementById("info_ur_l").innerHTML = data.ur_l;
-                            document.getElementById("info_ur_o").innerHTML = data.ur_o;
-                            document.getElementById("info_ur_z").innerHTML = data.ur_z;
-                            document.getElementById("info_korm_v").innerHTML = data.korm_v;
-                            document.getElementById("info_korm_l").innerHTML = data.korm_l;
-                            document.getElementById("info_korm_o").innerHTML = data.korm_o;
-                            document.getElementById("info_korm_z").innerHTML = data.korm_z;
-                            document.getElementById("info_recommend_").innerHTML = data.recommend_;
-                            document.getElementById("info_recom_catt").innerHTML = data.recom_catt;
-                        },
-                        error: function () {
-                        }
-                    });
-                    // отображение информации о пастбище
-                    if (dialog_info_pasture_first) {
-                        dialog_info_pasture_first = false;
-                        $("#dialog_info_pasture").dialog({
-                            width: 500,
-                            height: 400,
+                    if (data.features.length > 0) {
+                        var polyFeature = new ol.Feature({
+                            geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
                         });
-                    }
-                    else {
-                        $("#dialog_info_pasture").dialog({ });
+                        Source_select_pasturepol.addFeature(polyFeature);
+                        // получение информации о пастбище
+                        $.ajax({
+                            url: '@Url.Action("GetPastureInfo")',
+                            data: JSON.stringify({ "objectid": data.features[0].properties.objectid }),
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                document.getElementById("info_nomer_vydela").innerHTML = data.nomer_vydela;
+                                document.getElementById("info_class_id").innerHTML = data.class_id;
+                                document.getElementById("info_group_id").innerHTML = data.group_id;
+                                document.getElementById("info_group_id_lat").innerHTML = data.group_id_lat;
+                                document.getElementById("info_otdel_id").innerHTML = data.otdel_id;
+                                document.getElementById("info_ur_v").innerHTML = data.ur_v;
+                                document.getElementById("info_ur_l").innerHTML = data.ur_l;
+                                document.getElementById("info_ur_o").innerHTML = data.ur_o;
+                                document.getElementById("info_ur_z").innerHTML = data.ur_z;
+                                document.getElementById("info_korm_v").innerHTML = data.korm_v;
+                                document.getElementById("info_korm_l").innerHTML = data.korm_l;
+                                document.getElementById("info_korm_o").innerHTML = data.korm_o;
+                                document.getElementById("info_korm_z").innerHTML = data.korm_z;
+                                document.getElementById("info_recommend_").innerHTML = data.recommend_;
+                                document.getElementById("info_recom_catt").innerHTML = data.recom_catt;
+                            },
+                            error: function () {
+                            }
+                        });
+                        // отображение информации о пастбище
+                        if (dialog_info_pasture_first) {
+                            dialog_info_pasture_first = false;
+                            $("#dialog_info_pasture").dialog({
+                                width: 500,
+                                height: 400,
+                            });
+                        }
+                        else {
+                            $("#dialog_info_pasture").dialog({});
+                        }
                     }
                 }
             });
@@ -1587,9 +1584,6 @@
     };
 
     $(document).ready(function (e) {
-        //$.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        //});
-
         $("#MapSources").val("OpenStreetMap");
 
         // высота карты
@@ -1602,7 +1596,7 @@
         document.getElementById('sidepanel').setAttribute("style", "width:0px");
         document.getElementById('sidepanel').setAttribute("style", "display:none");
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1652,7 +1646,7 @@
         var button = document.getElementById('sidepanelshowhide');
         button.innerHTML = '«';
 
-        //домой
+        // домой
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
         map.updateSize();
         map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize());
@@ -1661,9 +1655,7 @@
 
         view = new ol.View({
             projection: 'EPSG:3857',
-            center: [7447522, 6202316],
-            zoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom(),
-            minZoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom()
+            center: [7447522, 6202316]
         });
         map.setView(view);
 

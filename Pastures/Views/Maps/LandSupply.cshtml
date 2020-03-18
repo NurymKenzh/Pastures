@@ -1204,7 +1204,6 @@
             Source_found_zemfondpol.addFeature(feature);
             count++;
         }
-        //alert(count);
     };
 
     // маска поиска земельных запасов
@@ -1575,9 +1574,7 @@
 
         view = new ol.View({
             projection: 'EPSG:3857',
-            center: [7447522, 6202316],
-            zoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom(),
-            minZoom: map.getView().fit([5175092, 7455797, 9719952, 4948835], map.getSize()).getZoom()
+            center: [7447522, 6202316]
         });
         map.setView(view);
 
