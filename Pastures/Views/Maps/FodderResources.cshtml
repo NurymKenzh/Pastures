@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
 <script src="~/Scripts/jquery-1.12.4.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.12.0.js"></script>
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+@*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
 
 <link href="~/Content/ol.css" rel="stylesheet" />
 <script src="~/Scripts/ol.js"></script>
@@ -26,7 +28,7 @@
     .ui-dialog,
     .ui-dialog:before,
     .ui-dialog:after {
-              box-sizing: content-box;
+        box-sizing: content-box;
     }
 
     .toppanel {
@@ -364,10 +366,10 @@
                 Весна
             </td>
             <td style="padding-left: 10px;">
-                <input type="text" id="find_ur_v_1" class="form-control" style="width: 70px; display: inline;"/> - <input type="text" id="find_ur_v_2" class="form-control" style="width: 70px; display: inline;"/>
+                <input type="text" id="find_ur_v_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_ur_v_2" class="form-control" style="width: 70px; display: inline;" />
             </td>
             <td style="padding-left: 10px;">
-                <input type="text" id="find_korm_v_1" class="form-control" style="width: 70px; display: inline;"/> - <input type="text" id="find_korm_v_2" class="form-control" style="width: 70px; display: inline;"/>
+                <input type="text" id="find_korm_v_1" class="form-control" style="width: 70px; display: inline;" /> - <input type="text" id="find_korm_v_2" class="form-control" style="width: 70px; display: inline;" />
             </td>
         </tr>
         <tr>
@@ -480,7 +482,7 @@
         </ul>
         <div id="tabs1" style="height:calc(100% - 50px); width:100%;"></div>
         <div id="tabs2" style="height:calc(100% - 50px); width:100%;">
-            <table id="table_info_classes" ></table>
+            <table id="table_info_classes"></table>
         </div>
     </div>
 </div>
@@ -510,7 +512,7 @@
 
     // источник данных и слой Гидрография (линии)
     var Source_hdrlin = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:hdrlin',
             'VERSION': '1.1.0',
@@ -526,7 +528,7 @@
 
     // источник данных и слой Гидрография (полигоны)
     var Source_hdrpol = new ol.source.ImageWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:hdrpol',
             'VERSION': '1.1.0',
@@ -542,7 +544,7 @@
 
     // источник данных и слой Населённые пункты (точки)
     var Source_poppnt = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:poppnt',
             'VERSION': '1.1.0',
@@ -558,7 +560,7 @@
 
     // источник данных и слой Населённые пункты (полигоны)
     var Source_poppol = new ol.source.ImageWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:poppol',
             'VERSION': '1.1.0',
@@ -574,7 +576,7 @@
 
     // источник данных и слой Автодороги и пути (линии)
     var Source_rdslin = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:rdslin',
             'VERSION': '1.1.0',
@@ -590,7 +592,7 @@
 
     // источник данных и слой adm123pol
     var Source_adm123pol = new ol.source.TileWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:adm123pol',
             'VERSION': '1.1.0',
@@ -621,7 +623,7 @@
 
     // источник данных и слой pasturepol
     var Source_pasturepol = new ol.source.ImageWMS({
-        url: 'http://' + WWW + ':8080/geoserver/Pastures/wms?',
+        url: WWW + 'Pastures/wms?',
         params: {
             'LAYERS': 'Pastures:pasturepol',
             'VERSION': '1.1.0',
@@ -674,7 +676,7 @@
     // векторный слой сельских округов (не отображается на карте)
     var Layer_adm3pol_v = new ol.layer.Vector();
     // векторный слой пастбищ
-    var url_pasturepol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:pasturepol&outputFormat=text/javascript&format_options=callback:getJson";
+    var url_pasturepol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:pasturepol&outputFormat=text/javascript&format_options=callback:getJson";
     $.ajax({
         jsonp: false,
         jsonpCallback: 'getJson',
@@ -691,7 +693,7 @@
                 })
             });
             // векторный слой областей
-            var url_adm1pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm1pol&outputFormat=text/javascript&format_options=callback:getJson";
+            var url_adm1pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm1pol&outputFormat=text/javascript&format_options=callback:getJson";
             $.ajax({
                 jsonp: false,
                 jsonpCallback: 'getJson',
@@ -708,7 +710,7 @@
                         })
                     });
                     // векторный слой районов
-                    var url_adm2pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm2pol&outputFormat=text/javascript&format_options=callback:getJson";
+                    var url_adm2pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm2pol&outputFormat=text/javascript&format_options=callback:getJson";
                     $.ajax({
                         jsonp: false,
                         jsonpCallback: 'getJson',
@@ -725,7 +727,7 @@
                                 })
                             });
                             // векторный слой сельских округов
-                            var url_adm3pol_v = "http://" + WWW + ":8080/geoserver/Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm3pol&outputFormat=text/javascript&format_options=callback:getJson";
+                            var url_adm3pol_v = WWW + "Pastures/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Pastures:adm3pol&outputFormat=text/javascript&format_options=callback:getJson";
                             $.ajax({
                                 jsonp: false,
                                 jsonpCallback: 'getJson',
@@ -1592,8 +1594,8 @@
     };
 
     $(document).ready(function (e) {
-        $.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
-        });
+        //$.getScript("http://code.jquery.com/ui/1.12.0/jquery-ui.min.js", function (data, textStatus, jqxhr) {
+        //});
 
         $("#MapSources").val("OpenStreetMap");
 
