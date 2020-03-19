@@ -623,6 +623,7 @@
     <Content Include="Images\About\image057.wmz" />
     <Content Include="Images\About\image063.wmz" />
     <Content Include="Pdf\Manual.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
