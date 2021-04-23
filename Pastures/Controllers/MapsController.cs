@@ -12,7 +12,7 @@ namespace Pastures.Controllers
     {
         private NpgsqlContext db = new NpgsqlContext();
 
-        const string geoserverURL = "http://92.46.36.100:8080/geoserver/";
+        const string geoserverPort = "8080";
 
         struct PieData
         {
@@ -68,7 +68,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            ViewBag.geoserverURL = geoserverURL;
+            ViewBag.geoserverURL = $"{Request.Url.Scheme}://{Request.Url.Host}:{geoserverPort}/geoserver/";
 
             return View();
         }
@@ -97,7 +97,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            ViewBag.geoserverURL = geoserverURL;
+            ViewBag.geoserverURL = $"{Request.Url.Scheme}://{Request.Url.Host}:{geoserverPort}/geoserver/";
 
             return View();
         }
@@ -121,7 +121,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            ViewBag.geoserverURL = geoserverURL;
+            ViewBag.geoserverURL = $"{Request.Url.Scheme}://{Request.Url.Host}:{geoserverPort}/geoserver/";
 
             return View();
         }
@@ -151,7 +151,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            ViewBag.geoserverURL = geoserverURL;
+            ViewBag.geoserverURL = $"{Request.Url.Scheme}://{Request.Url.Host}:{geoserverPort}/geoserver/";
 
             return View();
         }
@@ -179,7 +179,7 @@ namespace Pastures.Controllers
                     "TE",
                     "Name");
 
-            ViewBag.geoserverURL = geoserverURL;
+            ViewBag.geoserverURL = $"{Request.Url.Scheme}://{Request.Url.Host}:{geoserverPort}/geoserver/";
 
             return View();
         }
